@@ -3,7 +3,9 @@
 using namespace std ;
 
 int main (){
-	float a,b,c,d,e,f, resultado = 0;
+	float a,b,c,d,e, resultado = 0;
+	float f;
+	
 	cout << "Digite el valor de a: ";
 	cin >> a;
 	cout << "Digite el valor de b: ";
@@ -16,7 +18,8 @@ int main (){
 	cin >> e;	
 	cout << "Digite el valor de f: ";
 	cin >> f;
-	resultado = (a+(b/c))/(d+(c/f));
+	resultado = (a+(b/c))/(d+(e/f));
+	cout.precision(3);
 	cout <<"El resultado es: " <<resultado <<endl;
 	
 	return 0;
