@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-//Esta es una modificacón de lo para ver lo de git
+//Esta es una modificación de lo para ver lo de git
 
 int main(){
 	float a, b, resultado = 0;
