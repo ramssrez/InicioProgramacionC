@@ -6,7 +6,7 @@ la salida estándar si el carácter esuna vocal minúscula, es una vocal mayúscula 
 using namespace std;
 int main (){
 	char letra;
-	cout <<"Ingresa una letra del teclado";
+	cout <<"Ingresa una letra del teclado: ";
 	cin >> letra;
 	switch(letra){
 		case 'a':
