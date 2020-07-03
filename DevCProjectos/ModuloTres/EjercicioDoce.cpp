@@ -9,7 +9,7 @@ Caso 3. Salir.
 using namespace std;
 int main (){
 	int opc;
-	cout <<"\tBienvenido al ejercicio cuatro"<<endl;
+	cout <<"\tBienvenido, elige una opcion"<<endl;
 	cout <<"1. Cubo de un numero"<<endl;
 	cout <<"2. Numero par o impar"<<endl;
 	cout <<"3. Salir "<<endl;
@@ -21,6 +21,19 @@ int main (){
 			cout <<"Ingrese un numero: ";
 			cin >> n1;
 			cout << "El cubo del numero es: " <<pow(n1,3);
+			break;
+		case 2:
+			int n2;
+			cout <<"Ingrese un numero: ";
+			cin >> n2;
+			if(n2%2==0){
+				cout<<"El numero es par ";
+			}else {
+				cout<<"El numero es impar";
+			}
+			break;
+		case 3:
+			cout <<"Adios!!!!!!!!!!!!!!";
 			break;
 	}
 	return 0;
