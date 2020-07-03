@@ -6,7 +6,7 @@ en la salida estándar si el cacrácter es una vocal minuscula o no
 using namespace std;
 int main (){
 	char caracter;
-	cout <<"Ingresa una letra del teclado";
+	cout <<"Ingresa una letra del teclado: ";
 	cin >> caracter;
 	switch(caracter){
 		case 'a':
