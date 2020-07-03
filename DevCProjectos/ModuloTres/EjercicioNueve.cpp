@@ -16,6 +16,11 @@ int main(){
 	cin >>numero;
 	//Primero se tiene que dividir el numeoro para obtener sus miles, las centenas, las decenas y las unidades
 	//De est aforma obtenemos los diferentes nuero que lo componen
+	if(numero>3999){
+		cout <<"Sale del rango de seleccion, usa otro numero menor a este";
+		return 0;
+	}
+
 	unidades = numero%10;
 	numero /=10;
 	cout<<"Unidades "<<unidades<<endl;
@@ -32,7 +37,7 @@ int main(){
 	numero /=10;
 	cout<<"Miles "<<miles<<endl;
 	cout <<numero<<endl;
-	
+	cout << "El numero romano es: ";
 	switch(miles){
 		case 1: cout<<"M";break;
 		case 2: cout<<"MM";break;
@@ -69,7 +74,7 @@ int main(){
 		case 6: cout<<"VI";break;
 		case 7: cout<<"VII";break;
 		case 8: cout<<"VIII";break;
-		case 9: cout<<"IX";break;
+		case 9: cout<<"";break;
 	}
 	return 0;
 }
