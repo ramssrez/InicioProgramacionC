@@ -16,6 +16,12 @@ int main(){
 	cin >>numero;
 	//Primero se tiene que dividir el numeoro para obtener sus miles, las centenas, las decenas y las unidades
 	unidades = numero%10;
-	cout<<unidades;
+	numero /=10;
+	cout<<"Unidades "<<unidades<<endl;
+	cout <<numero<<endl;
+	decenas = numero%10;
+	numero /=10;
+	cout<<"Decenas "<<decenas<<endl;
+	cout <<numero<<endl;
 	return 0;
 }
