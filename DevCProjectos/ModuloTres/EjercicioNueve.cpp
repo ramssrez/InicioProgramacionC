@@ -23,5 +23,13 @@ int main(){
 	numero /=10;
 	cout<<"Decenas "<<decenas<<endl;
 	cout <<numero<<endl;
+	centenas = numero%10;
+	numero /=10;
+	cout<<"Centenas "<<centenas<<endl;
+	cout <<numero<<endl;
+	miles = numero%10;
+	numero /=10;
+	cout<<"Miles "<<miles<<endl;
+	cout <<numero<<endl;
 	return 0;
 }
