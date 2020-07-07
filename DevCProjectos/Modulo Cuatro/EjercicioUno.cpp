@@ -11,7 +11,7 @@ int main (){
 		cout <<"Ingrese un numero entre el 1 y el 10: ";
 		cin >>numero;
 	}while((numero<1)||(numero>10));
-	for (int i = 1; i<=20;i++){
+	for (int i = 1; i<=10;i++){
 		cout <<numero<<"*"<<i<<" = "<< numero*i<<endl;
 	}
 	
