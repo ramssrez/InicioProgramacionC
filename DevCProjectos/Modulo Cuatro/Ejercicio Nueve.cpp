@@ -1,18 +1,19 @@
 /*
 Escriba un programa que calcule el
- valor de : 1+2+3+..+n(factorial)
+ valor de : 1*2*3*..*n(factorial)
 */
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
 int main (){
-	int n, suma=0;
+	int n, factorial=1;
 	cout <<"Digite un valor: ";
 	cin >> n;
 	for (int i = 1; i<=n; i++){
-		suma = suma +((2*i)-1);
-		//suma +=(2*i-1);
+        //factorial *=i
+		factorial = factorial*i;
 	}
-	cout <<"La suma es: " << suma;
+	cout <<"La factorial es: " << factorial <<endl;
+	system("pause");
 	return 0;
 }
