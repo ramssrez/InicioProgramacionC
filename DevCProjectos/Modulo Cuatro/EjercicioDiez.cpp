@@ -11,7 +11,7 @@ int main (){
 	cin >> numero;
 	for (int j = 1; j<=numero; j++){
      	//factorial *=i
-		factorial = factorial*j;
+		factorial *=j;
 		suma +=factorial;
 	}
 	cout <<"El resultado es: " << suma<<endl;
