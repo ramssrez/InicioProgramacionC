@@ -15,8 +15,9 @@ main(){
 	scanf("%f",&radio);
 	area = PI * radio * radio;
 	areaDos=PI*pow(radio,2);
-	printf("Area = %f \n",area);
-	printf ("El area del circulo de radio: %d es %.2f \n",radioDos, area);	
+	printf("Area = %f [Unidaes lineales] \n",area);
+	printf ("El area del circulo de radio: %d es %.2f [Unidaes Cuadradas] \n",radioDos, area);	
+	printf("El perimetro es %.2f [Unidades lineales] \n",PI*2*radio);
 	getchar();
 	getchar();
 }
