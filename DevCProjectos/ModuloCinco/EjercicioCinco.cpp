@@ -20,6 +20,6 @@ int main (){
 			mayor =vector [i]; 
 		}
 	}
-	cout <<"El numero mayor es: "<<mayor;
+	cout <<"El numero mayor del vector es: "<<mayor;
 	return 0;
 }
