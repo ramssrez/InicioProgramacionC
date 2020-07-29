@@ -10,6 +10,7 @@ main(){
 	//Declaración de variables locales de la funcion main
 	float radio, area, areaDos;
 	int radioDos = 3;
+	int base, altura;
 	printf("Calcula el area de una circuferencia \n");
 	printf("Ingrese el radio: ");
 	scanf("%f",&radio);
@@ -18,6 +19,15 @@ main(){
 	printf("Area = %f [Unidaes lineales] \n",area);
 	printf ("El area del circulo de radio: %d es %.2f [Unidaes Cuadradas] \n",radioDos, area);	
 	printf("El perimetro es %.2f [Unidades lineales] \n",PI*2*radio);
+	
+	printf("Programa que calcula el area de un rectangulo \n");
+	printf("Ingresa los valores de altura y base: ");
+	scanf("%d , %d",&altura,&base);
+	printf("El area del rectangulo de altura: %d y base: %d es : %d",altura,base,base*altura);
+	
+	
+	
+	
 	getchar();
 	getchar();
 }
