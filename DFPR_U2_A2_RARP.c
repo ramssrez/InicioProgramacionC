@@ -57,12 +57,6 @@ int main(void){
 			//Condicional para que al final de tener el máximo de personas no nos vuelva a mandar mensaje
 			if(personaTotal<100){
 				printf("*********** Solo pueden salir e ingresar de a dos personas cada 10 minutos ***********\n\n\n");
-					printf("Ingresa el número de personas que entran a la tienda: ");
-					scanf("%d",&personaEntra);
-					if(personaEntra>2){
-						printf("***********Solo pueden ingresar dos personas, vuelve a ingrsar el número de personas \n***********");
-						continue;
-					}
 			}
 		}
 		
