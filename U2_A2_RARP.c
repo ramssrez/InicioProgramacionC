@@ -17,11 +17,11 @@ mensaje indicando que la tienda ya va a cerrar.
 #include <time.h>
 #include <windows.h>
 int main(void){
-	int numeroPersona=0,personaEntra,personaSale, contador, segundos=0, minutos=0,horas=0,personaTotal=0;
-	printf("Ingresa el numero de personas que entran a la tienda: ");
-	scanf("%d",&personaEntra);
-	printf("ingresa el numero de personas que salen de la tienda ");
-	scanf("%d",&personaSale);
+	int numeroPersona=0,personaEntra=0,personaSale=0, contador, segundos=0, minutos=0,horas=0,personaTotal=0,total=0;
+//	printf("Ingresa el numero de personas que entran a la tienda: ");
+//	scanf("%d",&personaEntra);
+//	printf("ingresa el numero de personas que salen de la tienda ");
+//	scanf("%d",&personaSale);
 	//printf("El numero de personas son: %d \n",personaSale);
 	
 	do {
@@ -29,12 +29,19 @@ int main(void){
 		scanf("%d",&personaEntra);
 		printf("ingresa el numero de personas que salen de la tienda ");
 		scanf("%d",&personaSale);
-		pero
-		printf("En la tienda hay: %.2d" numeroPersona);
+		numeroPersona =numeroPersona + personaEntra;
+		//totalEntra = totalEntra +personaEntra;
+		personaTotal = personaEntra-personaSale;
+		total = total + personaTotal;
+		printf("En la tienda hay: %.2d\n", total);
+		printf("En la tienda han ingresado: %.2d\n", numeroPersona);
+		
+		if(numeroPersona==4){
+			printf("El limite es excedido \n");
+		}
 
 		
 		
-		numeroPersona =numeroPersona + personaEntra;
 	}while(numeroPersona<=10);
 	
 	
@@ -47,7 +54,7 @@ int main(void){
 //			break;
 //		}
 //	}
-	printf("Los segundos son %.2d \n ",segundos);
+	//printf("Los segundos son %.2d \n ",segundos);
 	system("pause");
 	return 0;
 }
