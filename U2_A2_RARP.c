@@ -17,32 +17,37 @@ mensaje indicando que la tienda ya va a cerrar.
 #include <time.h>
 #include <windows.h>
 int main(void){
-	int numeroPersona, contador, segundos=0, minutos=0,horas=0;
+	int numeroPersona=0,personaEntra,personaSale, contador, segundos=0, minutos=0,horas=0,personaTotal=0;
 	printf("Ingresa el numero de personas que entran a la tienda: ");
-	scanf("%d",&numeroPersona);
-	printf("El numero de personas son: %d \n",numeroPersona);
-	while(1){
-		segundos ++;
-		if (segundos==60){
-			//printf("Esto es una prueba de cronometro %d \n",segundos);			
-			segundos=0;
-			minutos++;
-			if (minutos ==10){
-				minutos =0;
-				horas++;	
-				break;
-			}
-			
-		}
-		//system("cls");
-		//printf ("\n\n\n\t\t\t [%.2d:%.2d:%.2d]", horas, minutos, segundos);	
-	}
-	printf("Minutos: %.2d",minutos);
+	scanf("%d",&personaEntra);
+	printf("ingresa el numero de personas que salen de la tienda ");
+	scanf("%d",&personaSale);
+	//printf("El numero de personas son: %d \n",personaSale);
 	
+	do {
+		printf("Ingresa el numero de personas que entran a la tienda: ");
+		scanf("%d",&personaEntra);
+		printf("ingresa el numero de personas que salen de la tienda ");
+		scanf("%d",&personaSale);
+		pero
+		printf("En la tienda hay: %.2d" numeroPersona);
 
-	//printf("Hola mundo\n");
-	//printf("Segundo desde 1970: %ld \n" ,time(0));
-	//printf(asctime());	
+		
+		
+		numeroPersona =numeroPersona + personaEntra;
+	}while(numeroPersona<=10);
+	
+	
+	
+//	while(1){
+//		segundos++;
+//		printf("%.2d \n",segundos);
+//		Sleep(1000);
+//		if (segundos==60){
+//			break;
+//		}
+//	}
+	printf("Los segundos son %.2d \n ",segundos);
 	system("pause");
 	return 0;
 }
