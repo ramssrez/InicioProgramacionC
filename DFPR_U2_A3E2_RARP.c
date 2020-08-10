@@ -36,6 +36,7 @@ int main(){
 	float poblacion = 6168883.0;
 	float contagio = 23452.0;
 	float porcentaje = (contagio*100)/poblacion;
+	int caso;
 	//Salida de texto estandar para el estado seleccionado
 	printf("\t ******** Bienvendo al siguiente programa ******** \n\n");
 	printf("** Los siguientes datos que se presentan son hasta el 6 de agosto del año 2020 **\n\n");
@@ -46,18 +47,29 @@ int main(){
     
     //Sentencia de control if-else para determinar el tipo de mensaje de salida
 	if(porcentaje<=10){
-		printf("******** En el estado de %s hay pocos contagios. ******** \n\n", estado);
+		caso = 1;
 	}else if((porcentaje >= 11)&&(porcentaje<=20)){
+		caso = 2;
 		printf("******** El estado de %s tiene un porcentaje de contagios medio ********\n\n", estado);
 	}else if (porcentaje >20){
+		caso = 3;
 		printf("********Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
 	}
-	int porcentaje2 = 10;
+	int porcentaje2 = 21;
 	bool por = true;
-	switch(por){
-		case porcentaje2<=10:
-			printf("pureba de 10 ");
+	switch(porcentaje2){
+		case 0 ... 10:
+			printf("******** En el estado de %s hay pocos contagios. ******** \n\n", estado);
 			break;
+		case 11 ... 20:
+			printf("******** El estado de %s tiene un porcentaje de contagios medio ********\n\n", estado);
+			break;
+		case 21 ... 100:
+			printf("********Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
+			break;
+
+			
+
 		default:
 			printf("prueba dos");
 			break;
