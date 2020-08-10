@@ -27,7 +27,7 @@ int main(void){
 	unsigned int numeroPersona=0,personaEntra=0,personaSale=0,personaTotal=0,total=0; 
 	//Presetnación de nuestro programa
 	printf("********************************* ¡Bienvenidos a nuestra tienda departamental!  ********************************* \n\n\n");
-	printf("*********** Por disposición oficial solo podemos ingresar un límite de persona *********** \n\n\n");
+	printf("*********** Por disposición oficial solo podemos ingresar un límite de personas *********** \n\n\n");
 	
 	//Inicio de nuestro ciclo do while para poder ingresar los datos solicitados
 	do {
@@ -37,7 +37,7 @@ int main(void){
 		printf("ingresa el número de personas que salen de la tienda ");
 		scanf("%d",&personaSale);
 		//Procedimiento para aumentar el total de personas2 y contador de personas
-		numeroPersona =numeroPersona + personaEntra;
+		numeroPersona += personaEntra;
 		personaTotal = personaEntra-personaSale;
 		total = total + personaTotal;
 		
@@ -66,10 +66,10 @@ int main(void){
 		}
 		
 		
-	}while(1); //Fin del ciclo while, se le asigna 1 para que sea true
+	}while(1); //Fin del ciclo while, se le asigna 1 para que sea true, seindo infinito hasta que no lo permitamos
 	
 	//Despedida de nuestro programa
-	printf("*********** La tienda esta cerrada agradecemos tu compra ***********\n");
+	printf("*********** La tienda esta cerrada, agradecemos tu visita ***********\n");
 	//Uso de este método para que no se cierre la ventana .exe cuando termine el programa
 	system("pause");
 	return 0;
