@@ -18,22 +18,16 @@ contagios medio”
 int main(){
 	//string nombre = "pepepicas";
 	char estado [20] ="Puebla";
-	int poblacion = 120000;
-	int contagio = 10000;
+	int poblacion = 6168883;
+	int contagio = 23452;
 	float porcentaje = (contagio*100)/poblacion;
 	int porcentajes = 10;
 	porcentaje = 21;
-	
-	/*
-	
-	printf("El estado de %s",estado);
-	printf(" cuenta con %d", poblacion);
-	printf (" de población y con un total de %d", contagio);
-	printf (" el cual representa el %f ", porcentaje);
-	printf(" de la población contagiada");
-	
-	*/
-	
+	printf("\tEl estado en estudio es: %s\n", estado);
+	printf("\tEl estado de %s tiene una una poblacion de: %d personas.\n", estado, poblacion);
+	printf("\tEl estado de %s tiene una total de contadios de: %d personas.\n", estado, contagio);
+	printf("\tEl estado de %s tiene un porcentaje de: %.2f %% de casos.\n", estado, porcentaje);
+
 	if(porcentaje<=10){
 		printf("En el estado de %s hay pocos contagios. ", estado);
 	}else if((porcentaje >= 11)&&(porcentaje<=20)){
@@ -41,17 +35,6 @@ int main(){
 	}else if (porcentaje >20){
 		printf("Alerta en el estado de %s, existen muchos contagios. ", estado);
 	}
-	/*
-	switch (porcentajes){
-		case 10 :
-			printf("En el estado: %s hay pocos casos.", estado);
-			break;
-		default:
-			printf("ninguna de las anteriores");
-			break;
-	}
-	*/
-	
 	system("pause");
 	return 0;
 }
