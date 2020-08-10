@@ -36,7 +36,9 @@ int main(){
 	float poblacion = 6168883.0;
 	float contagio = 23452.0;
 	float porcentaje = (contagio*100)/poblacion;
-	int caso;
+	int porcentajeEntero;
+	//Como la sentencia switch case solo ingresa variables de tipo entero, casteamos el porcentaje a entero para poder usar switch
+	porcentajeEntero = (int)porcentaje;
 	//Salida de texto estandar para el estado seleccionado
 	printf("\t ******** Bienvendo al siguiente programa ******** \n\n");
 	printf("** Los siguientes datos que se presentan son hasta el 6 de agosto del año 2020 **\n\n");
@@ -44,20 +46,8 @@ int main(){
 	printf("\tEl estado de %s tiene una una población de: %.1f personas.\n", estado, poblacion);
 	printf("\tEl estado de %s tiene una total de contagios de: %.1f personas.\n", estado, contagio);
 	printf("\tEl estado de %s tiene un porcentaje de: %.3f %% de casos.\n\n", estado, porcentaje);
-    
-    //Sentencia de control if-else para determinar el tipo de mensaje de salida
-	if(porcentaje<=10){
-		caso = 1;
-	}else if((porcentaje >= 11)&&(porcentaje<=20)){
-		caso = 2;
-		printf("******** El estado de %s tiene un porcentaje de contagios medio ********\n\n", estado);
-	}else if (porcentaje >20){
-		caso = 3;
-		printf("********Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
-	}
-	int porcentaje2 = 21;
-	bool por = true;
-	switch(porcentaje2){
+	//Sentencia de control switch case
+	switch(porcentajeEntero){
 		case 0 ... 10:
 			printf("******** En el estado de %s hay pocos contagios. ******** \n\n", estado);
 			break;
@@ -65,16 +55,13 @@ int main(){
 			printf("******** El estado de %s tiene un porcentaje de contagios medio ********\n\n", estado);
 			break;
 		case 21 ... 100:
-			printf("********Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
+			printf("******** Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
 			break;
 
-			
-
-		default:
-			printf("prueba dos");
-			break;
-		
 	}
+	
+	printf("********Gracias por tu tiempo. ********\n");
+	
 	//método que permite que no se cierre la ventana después de su ejecución.
 	system("pause");
 	//Retorno del valor 0 para dar por terminado el programa
