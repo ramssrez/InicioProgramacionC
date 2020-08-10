@@ -21,7 +21,7 @@ int main()
 							  {
 							    printf("\n Escriba la calificacion numero %d \n",i);
 							    printf("\t");
-								scanf("%d,%d,%d",&calif1);
+								scanf("%d,%d,%d",&calif);
 							   }
 							 printf("\n\n Las calificaciones se han guardado \n\n\t",i);
 							 printf("\n\n Ha regresado al Menu \n\n\t",i);
