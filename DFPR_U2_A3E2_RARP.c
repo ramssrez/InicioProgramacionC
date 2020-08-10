@@ -20,6 +20,7 @@ contagios medio”
 //Librerias que nos permiten agregar caracteres especiales al texto de salida
 #include <wchar.h>
 #include <locale.h>
+#include <stdbool.h> 
 //Inicio de la función principal
 int main(){
 	//método que nos permite el ingreso de caracteres especiales como los acentos
@@ -50,6 +51,17 @@ int main(){
 		printf("******** El estado de %s tiene un porcentaje de contagios medio ********\n\n", estado);
 	}else if (porcentaje >20){
 		printf("********Alerta en el estado de %s, existen muchos contagios.********\n\n ", estado);
+	}
+	int porcentaje2 = 10;
+	bool por = true;
+	switch(por){
+		case porcentaje2<=10:
+			printf("pureba de 10 ");
+			break;
+		default:
+			printf("prueba dos");
+			break;
+		
 	}
 	//método que permite que no se cierre la ventana después de su ejecución.
 	system("pause");
