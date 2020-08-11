@@ -27,7 +27,7 @@ pantalla los siguientes indicadores:
 #include <wchar.h>
 
 #include <locale.h>
-int opcion,i,j,m,n,calif,calif1,calif2,suma, numeroAlumno;
+int opcion,i,j,m,n,calif,calif1,calif2,suma, numeroAlumno, suma=0;
 int calificacion [3];
 int alumnos [100];
 int matriz [100][100];
@@ -55,7 +55,7 @@ int main(){
 			}
 			*/
 			for (m = 1; m<=numeroAlumno;m++){
-				printf("Ingresa el alumno %d \n",m);
+				printf("Ingresa las calificaciones del alumno %d: \n",m);
 				for (n=0;n<3;n++){
 					printf("Calificación %d: ",(n+1));
 					scanf("%d",&matriz[m][n]);	
@@ -65,11 +65,13 @@ int main(){
 			for (m = 1; m<=numeroAlumno;m++){
 				printf(" el alumno %d \n",m);
 				for (n=0;n<3;n++){
-					printf(" %d  ",matriz[m][n]);	
+					printf(" %d  \n",matriz[m][n]);	
+					suma = suma + matriz[m][n];
 				}
 			}
 			
 				 
+			printf("La suma es: %d ",suma );
 			printf("\n\n Ha regresado al Menu \n\n\t",i);
 			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n",i);
             break;
