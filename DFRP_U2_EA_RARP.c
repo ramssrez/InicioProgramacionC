@@ -35,23 +35,28 @@ int matriz [100][100];
 int main(){
 	setlocale(LC_ALL, "");
 
-    printf("\n\t\tBienvenido al sistema de calificaciones\n\n");  
+    printf("\n\t ********** Bienvenido al sistema de calificaciones **********\n\n");  
     do{
-    	printf("\n\tSeleccione la opción de su preferencia \n\n\t");
-        printf("\n\t1)Ingresar las calificaciones \n\t2)Mostrar los indicadores \n\t3)Salir del sistema de calificaciones.\n\t");
-        scanf("%i",&opcion);
+    	printf("\n\tSeleccione la opción de su preferencia \n\t");
+        printf("\n\t1)Ingresar las calificaciones.");
+        printf("\n\t2)Mostrar los indicadores.");
+        printf("\n\t3)Salir del sistema de calificaciones.");
+        printf("\n\tEscribe la opción que deseas escoger: ");
+        scanf("%d",&opcion);
 		switch(opcion){
 		case 1:
-			printf("Ingresa el número de alumnos que desea ingresar: \n");
+			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
+			printf("\n\n **************************** Ha ingresado a la primera opción ****************************\n\n\t");
+			printf("\n\tIngresa el número de alumnos que desea ingresar: ");
             scanf("%d", &numeroAlumno); 
-			printf("El numero de alumnos es: %d \n",numeroAlumno);  
+			printf("\tEl numero de alumnos es: %d \n",numeroAlumno);  
 			for (i = 1; i<=numeroAlumno;i++){
-				printf("Ingresa las calificaciones del alumno %d: \n",i);
-				printf("Calificación uno: \n");
+				printf("\tIngresa las calificaciones del alumno %d: \n",i);
+				printf("\tCalificación uno: ");
 				scanf("%d", &calUno);
-				printf("Calificación dos: \n");
+				printf("\tCalificación dos: ");
 				scanf("%d", &calDos);
-				printf("Calificación tres: \n");
+				printf("\tCalificación tres: ");
 				scanf("%d", &calTres);
 				if (calUno >= 6 && calDos >= 6 && calTres >=6){
  					aprobadoTodos ++;
@@ -61,63 +66,45 @@ int main(){
 		 			aprobadoUno ++;
 		 		}
 			}
-			/*      			  
- 			for(i=1;i<4;i++) {
-				printf("\n Escriba la calificacion numero %d :\n",i);
-				scanf("%d", &calificacion[i]);
-			}
-			printf("\n\n Las calificaciones se han guardado \n\n",i);
-     		for (i=1;i<4;i++){
-				printf("Calificación %d :  %d \n",i, calificacion[i]);
-			}
-			*/
-			
-			/*
-			for (m = 1; m<=numeroAlumno;m++){
-				printf("Ingresa las calificaciones del alumno %d: \n",m);
-				for (n=0;n<3;n++){
-					printf("Calificación %d: ",(n+1));
-					scanf("%d",&matriz[m][n]);	
-				}
-			}
-			printf("\n");
-			for (m = 1; m<=numeroAlumno;m++){
-				printf(" el alumno %d \n",m);
-				for (n=0;n<3;n++){
-					printf(" %d  \n",matriz[m][n]);	
-					suma = suma + matriz[m][n];
-				}
-			}
-			*/
-				 
-			//printf("La suma es: %d ",suma );
-			printf("\n\n Ha regresado al Menu \n\n\t",i);
-			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n",i);
+		
+			printf("\n\n **************************** Ha regresado al menú principal ****************************\n\n\t");
+			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
             break;
 
         case 2:
-            printf("La siguiente información de los datos obtenidos \n");
+        	printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
+        	printf("\n\n **************************** Ha ingresado a la segunda opción ****************************\n\n\t");
+            printf("\n\tLa siguiente información de los datos obtenidos en el paso anterior \n");
             if(aprobadoTodos == 0 && aprobadoUltimo ==0 && aprobadoUno == 0){
-            	printf("No se ingresaron calificaciones al sistema\n");
+            	printf("\tNo se han ingresaron calificaciones al sistema, ingreselas en la opción 1\n");
 	 		    //cout <<"Todos los alumnos reprobaron los tres examenes"<<endl;
 			}else{
-				printf("El número de alumnos que aprobaron todos los examenes: %d\n", aprobadoTodos);
-				printf("El numero que aprobaron el ultimo: %d\n",aprobadoUltimo);
-				printf("El numero que aprobaron solo uno: %d\n",aprobadoUno);
-			}       
+				printf("\tEl número de alumnos que aprobaron todos los examenes: %d\n", aprobadoTodos);
+				printf("\tEl número de alumnos que aprobaron el último examen: %d\n",aprobadoUltimo);
+				printf("\tEl número de alumnos que aprobaron solo un examen: %d\n",aprobadoUno);
+			} 
+			printf("\n\n **************************** Ha regresado al menú principal ****************************\n\n\t");
+			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
             break;
 
         case 3: 
-		    printf("\nUsted acaba de salir del sistema de calificaciones\n");
-		    system("pause");
-   		    return 0;            
+        	printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
+        	printf("\n\n **************************** Ha ingresado a la tercera opción ****************************\n\n\t");
+		    printf("\n\t Usted acaba de salir del sistema de calificaciones\n");
+        
+		    //system("pause");
+   		    //return 0;            
             break;                          
         default:
-      		printf("\nNo eligió ninguna opción valida\n",162,162);
+        	printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
+      		printf("\n\t Ha elegido una opción invalida, vuelva a escoger una opción\n");
+      		printf("\n\n **************************** Ha regresado al menú principal ****************************\n\n\t");
+			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
             break;
         }
-    }while(1);
-    //printf("\n\tAcaba de salir del programa de compra de Videojuegos\n\t");
+    }while(opcion!=3);
+    printf("\n\n **************************** Agradecemos si visita, vuelva pronto ****************************\n\n\t");
+    printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
     system("pause");
     return 0;
 }
