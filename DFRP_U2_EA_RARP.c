@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <conio.h>
-#include <stdio.h>
+#include <stdlib.h>
 int op,op1,op2,i=0,calif,suma;
-int main()
-
-{
+int main(){
     printf("\n\t\tBienvenido al sistema de calificaciones\n\n\t");
  
     do
