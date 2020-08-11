@@ -25,72 +25,71 @@ pantalla los siguientes indicadores:
 #include <stdlib.h>
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
 #include <wchar.h>
+
 #include <locale.h>
-int op,i,calif,calif1,calif2,suma;
-int calificacion [10];
+int opcion,i,j,m,n,calif,calif1,calif2,suma, numeroAlumno;
+int calificacion [3];
+int alumnos [100];
+int matriz [100][100];
 int main(){
 	setlocale(LC_ALL, "");
 
-    printf("\n\t\tBienvenido al sistema de calificaciones\n\n\t");
- 
-    do
-    {
+    printf("\n\t\tBienvenido al sistema de calificaciones\n\n");  
+    do{
     	printf("\n\tSeleccione la opción de su preferencia \n\n\t");
         printf("\n\t1)Ingresar las calificaciones \n\t2)Mostrar los indicadores \n\t3)Salir del sistema de calificaciones.\n\t");
-        scanf("%i",&op);
+        scanf("%i",&opcion);
+		switch(opcion){
+		case 1:
+			printf("Ingresa el número de alumnos que desea ingresar: \n");
+            scanf("%d", &numeroAlumno); 
+			printf("El numero de alumnos es: %d \n",numeroAlumno);  
+			/*      			  
+ 			for(i=1;i<4;i++) {
+				printf("\n Escriba la calificacion numero %d :\n",i);
+				scanf("%d", &calificacion[i]);
+			}
+			printf("\n\n Las calificaciones se han guardado \n\n",i);
+     		for (i=1;i<4;i++){
+				printf("Calificación %d :  %d \n",i, calificacion[i]);
+			}
+			*/
+			for (m = 1; m<=numeroAlumno;m++){
+				printf("Ingresa el alumno %d \n",m);
+				for (n=0;n<3;n++){
+					printf("Calificación %d: ",(n+1));
+					scanf("%d",&matriz[m][n]);	
+				}
+			}
+			printf("\n");
+			for (m = 1; m<=numeroAlumno;m++){
+				printf(" el alumno %d \n",m);
+				for (n=0;n<3;n++){
+					printf(" %d  ",matriz[m][n]);	
+				}
+			}
+			
+				 
+			printf("\n\n Ha regresado al Menu \n\n\t",i);
+			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n",i);
+            break;
 
-                switch(op)
-                {
-                    case 1:
-                                            			  
-  							for(i=1;i<4;i++)
-							  {
-							    printf("\n Escriba la calificacion numero %d :\n",i);
-							//	scanf("%d,%d,%d",&calif,&calif1,&calif2);
-								scanf("%d", &calificacion[i]);
-							   }
-							 printf("\n\n Las calificaciones se han guardado \n\n",i);
-							 
-							
-							 for (i=1;i<4;i++){
-							 	printf("Calificación %d :  %d \n",i, calificacion[i]);
-							 }
-							 
-							 printf("\n\n Ha regresado al Menu \n\n\t",i);
-							 
+        case 2:
+            printf("Cual desea comprar, elige una opcion");
+                     
+            break;
 
-							 printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n",i);
-							
-                  
-                    break;
-
-                    case 2:
-                      printf("Cual desea comprar, elige una opcion");
-                      
-                    break;
-
-
-                     case 3: 
-					  printf("\nUsted acaba de salir del sistema de calificaciones");
-					  getch();
-   					  return 0;
-                      
-                    break;
-
-                                                
-                    default:
-                    printf("\nNo eligió ninguna opción valida\n",162,162);
-                    break;
-                }
-              }
-
-
-    while(op!=4);
-    printf("\n\tAcaba de salir del programa de compra de Videojuegos\n\t");
-
-
-
-
+        case 3: 
+		    printf("\nUsted acaba de salir del sistema de calificaciones\n");
+		    system("pause");
+   		    return 0;            
+            break;                          
+        default:
+      		printf("\nNo eligió ninguna opción valida\n",162,162);
+            break;
+        }
+    }while(1);
+    //printf("\n\tAcaba de salir del programa de compra de Videojuegos\n\t");
     system("pause");
     return 0;
 }
