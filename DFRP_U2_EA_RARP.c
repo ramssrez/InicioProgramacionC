@@ -27,7 +27,8 @@ pantalla los siguientes indicadores:
 #include <wchar.h>
 
 #include <locale.h>
-int opcion,i,j,m,n,calif,calif1,calif2,suma, numeroAlumno, suma=0;
+int opcion,i,calUno,calDos,calTres, numeroAlumno;
+int aprobadoTodos=0, aprobadoUltimo=0, aprobadoUno=0;
 int calificacion [3];
 int alumnos [100];
 int matriz [100][100];
@@ -44,6 +45,22 @@ int main(){
 			printf("Ingresa el número de alumnos que desea ingresar: \n");
             scanf("%d", &numeroAlumno); 
 			printf("El numero de alumnos es: %d \n",numeroAlumno);  
+			for (i = 1; i<=numeroAlumno;i++){
+				printf("Ingresa las calificaciones del alumno %d: \n",i);
+				printf("Calificación uno: \n");
+				scanf("%d", &calUno);
+				printf("Calificación dos: \n");
+				scanf("%d", &calDos);
+				printf("Calificación tres: \n");
+				scanf("%d", &calTres);
+				if (calUno >= 6 && calDos >= 6 && calTres >=6){
+ 					aprobadoTodos ++;
+		 		}else if(calUno<6&&calDos<6&&calTres>=6){
+		 			aprobadoUltimo ++;
+		 		}else if((calUno>=6&&calDos<6&&calTres<6)||(calUno<6&&calDos>=6&&calTres<6)||(calUno<6&&calDos<6&&calTres>=6)){
+		 			aprobadoUno ++;
+		 		}
+			}
 			/*      			  
  			for(i=1;i<4;i++) {
 				printf("\n Escriba la calificacion numero %d :\n",i);
@@ -54,6 +71,8 @@ int main(){
 				printf("Calificación %d :  %d \n",i, calificacion[i]);
 			}
 			*/
+			
+			/*
 			for (m = 1; m<=numeroAlumno;m++){
 				printf("Ingresa las calificaciones del alumno %d: \n",m);
 				for (n=0;n<3;n++){
@@ -69,16 +88,23 @@ int main(){
 					suma = suma + matriz[m][n];
 				}
 			}
-			
+			*/
 				 
-			printf("La suma es: %d ",suma );
+			//printf("La suma es: %d ",suma );
 			printf("\n\n Ha regresado al Menu \n\n\t",i);
 			printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n",i);
             break;
 
         case 2:
-            printf("Cual desea comprar, elige una opcion");
-                     
+            printf("La siguiente información de los datos obtenidos \n");
+            if(aprobadoTodos == 0 && aprobadoUltimo ==0 && aprobadoUno == 0){
+            	printf("No se ingresaron calificaciones al sistema\n");
+	 		    //cout <<"Todos los alumnos reprobaron los tres examenes"<<endl;
+			}else{
+				printf("El número de alumnos que aprobaron todos los examenes: %d\n", aprobadoTodos);
+				printf("El numero que aprobaron el ultimo: %d\n",aprobadoUltimo);
+				printf("El numero que aprobaron solo uno: %d\n",aprobadoUno);
+			}       
             break;
 
         case 3: 
