@@ -1,4 +1,5 @@
 /*
+El siguiente programa da solución a la siguiente problemamtica
 Una Universidad debido a la pandemia actual del COVID-19 ha decido que sus profesores
 registren las calificaciones de sus alumnos que realizaron examen extraordinario por medio
 de un sistema informático, debido a las circunstancias se requiere elabora un programa en
