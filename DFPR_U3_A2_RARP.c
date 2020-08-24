@@ -34,7 +34,6 @@ int main(){
 }
 //Definición de funciones
 void generadorEdades(int edades[]){
-	
 	for( i=0; i<numeroEdades;i++ ){
 		edades[i]= rand()%100;
    }
@@ -57,16 +56,18 @@ void verificarPersonas(int edades[]){
 		mayor=mayor+1;
 		}
 	}
+	//Impresión de las personas mayores y menores
 	menor = numeroEdades-mayor;
 	printf( "\tEl numero de personas mayores de edad son: %d personas\n", mayor);
 	printf( "\tEl numero de personas menores de edad son: %d personas\n", menor);
-	if(mayor>25) {
+	//Estructuras en donde se compara los 
+	if(mayor>(numeroEdades/2)) {
 		printf( "\tHay %d mayores de edad, por lo tanto hay mas mayores de edad\n",mayor);
 	}
- 	if(mayor==25){
+ 	if(mayor==(numeroEdades/2)){
 		printf( "\tHay %d mayores de edad y %d menores de edad,  por lo tanto hay igual mayores de edad que de menores\n",mayor,menor);
 	}
-	if(mayor<25){
+	if(mayor<(numeroEdades/2)){
 		printf( "\tHay %d menores de edad, por lo tanto hay mas mayores de edad\n",menor);
 	}
 }
