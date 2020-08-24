@@ -1,3 +1,13 @@
+/*
+Un estudiante de ingeniería decide crear un programa que realiza lo siguiente:
+
+a. Lea las edades de 50 personas.
+b. Calcule y presente el promedio de edades
+c. Calcule y presente cuántas personas hay mayores de 18 años y cuántas
+menores de edad.
+d. Calcule y presente si hay más personas mayores de edad, más menores de
+edad o si hay misma cantidad
+*/
 #include <stdio.h>////Librería estándar de C para la entrada y salida del información
 #include <stdlib.h>//Librería que nos permite dar sentencias al sistema
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
@@ -6,8 +16,9 @@
 //Librería en donde esta la función srand, en el cual las edades van cambiando conforme vuelva a ejecutar el progrma
 #include <time.h>
 //Declaración de las variables globales del programa
-int numeroEdades = 50, i;
+int numeroEdades = 10, i;
 //Declaración de las funciones
+void leerEdades(int edades[]);
 void generadorEdades(int edades[]);
 float promedioEdades (int edades[]);
 void verificarPersonas(int edades[]);
@@ -21,8 +32,9 @@ int main(){
 	unsigned int edad[numeroEdades];
 	printf( "\n\t ********** Bienvenido al programa generador de edades **********\n\n" );
 	printf( "\n\t ********** Hacemos uso de la función rand() en C **********\n\n" );
+	leerEdades(edad);
 	//Llamado a la función generarEdades()
-	generadorEdades(edad);
+	//generadorEdades(edad);
 	//Llamado a la función promedioEdades()
 	printf("\tEl promedio de edad es: %.0f años \n",promedioEdades (edad));
 	//Llamado a la función verificarPersonas()
@@ -71,6 +83,14 @@ void verificarPersonas(int edades[]){
 		printf( "\tHay %d menores de edad, por lo tanto hay mas mayores de edad\n",menor);
 	}
 }
+
+void leerEdades(int edades[]){
+	for (i = 0; i<numeroEdades;i++){
+		printf("\n Ingresa la edad de las personas %d: \n" ,(i+1));
+		scanf("%d", &edades[i]);
+	}
+}
+
    
    
 
