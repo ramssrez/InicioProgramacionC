@@ -60,7 +60,7 @@ void verificarPersonas(int edades[]){
 	menor = numeroEdades-mayor;
 	printf( "\tEl numero de personas mayores de edad son: %d personas\n", mayor);
 	printf( "\tEl numero de personas menores de edad son: %d personas\n", menor);
-	//Estructuras en donde se compara los 
+	//Estructuras en donde se compara las edades
 	if(mayor>(numeroEdades/2)) {
 		printf( "\tHay %d mayores de edad, por lo tanto hay mas mayores de edad\n",mayor);
 	}
