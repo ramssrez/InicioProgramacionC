@@ -1,51 +1,74 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>////Librería estándar de C para la entrada y salida del información
+#include <stdlib.h>//Librería que nos permite dar sentencias al sistema
+//Librerías que nos permiten agregar caracteres especiales al texto de salida
+#include <wchar.h>
+#include <locale.h>
+//Librería en donde esta la función srand, en el cual las edades van cambiando conforme vuelva a ejecutar el progrma
 #include <time.h>
-
-int main()
-{
-   srand(time(NULL));
-   unsigned int i=0,A[60],mayoredad=0;
-   float prom,suma=0;
-
-   printf( "Estos son 50 edades de personas ingresados: \n\n" );
-   for( i=1; i<51; i++ ){
-   	 A[i]= rand()%100;
+//Declaración de las variables globales del programa
+int numeroEdades = 50, i;
+//Declaración de las funciones
+void generadorEdades(int edades[]);
+float promedioEdades (int edades[]);
+void verificarPersonas(int edades[]);
+//Inicio de la función principal
+int main(){
+	//Método que nos permite el ingreso de caracteres especiales como los acentos
+	setlocale(LC_ALL, "");
+	//Invocación de la función srand()
+	srand(time(NULL));
+	//Declaración de variables locales para el problema a tratar como el vector de edades
+	unsigned int edad[numeroEdades];
+	printf( "\n\t ********** Bienvenido al programa generador de edades **********\n\n" );
+	printf( "\n\t ********** Hacemos uso de la función rand() en C **********\n\n" );
+	//Llamado a la función generarEdades()
+	generadorEdades(edad);
+	//Llamado a la función promedioEdades()
+	printf("\tEl promedio de edad es: %.0f años \n",promedioEdades (edad));
+	//Llamado a la función verificarPersonas()
+	verificarPersonas(edad);
+    //Método que permite que no se cierre la ventana después de su ejecución.
+	system("pause");
+	//Retorno del valor 0 para dar por terminado el programa
+	return 0;  
+}
+//Definición de funciones
+void generadorEdades(int edades[]){
+	
+	for( i=0; i<numeroEdades;i++ ){
+		edades[i]= rand()%100;
    }
-    for( i=1; i<51; i++ ){
-    printf( "%d,", A[i] );
+} 
+
+float promedioEdades (int edades[]){
+	//Declaración de variables locales promedioEdades()
+	float suma = 0;
+	for( i=0; i<numeroEdades; i++ ){
+   		suma = suma + edades[i]; 
+	}
+	return (suma/numeroEdades);
 }
 
-   for( i=1; i<51; i++ ){
-    suma = suma + A[i]; 
-}
-printf("\tSu suma es %.2f", suma);
-
-prom=suma/50;
-
-printf("\tEl promedio es %.2f",prom);
-
-for( i=0; i<50; i++ ){
-    
-    if(A[i]>19){
-    mayoredad=mayoredad+1;}
-}
-
- printf( "\nEl numero de personas mayores de edad son: %d", mayoredad );
- printf( "\nEl numero de personas menores de edad son: %d", 50-mayoredad );
- 
- if(mayoredad>25)
- {
- 	printf( "\nHay %d mayores de edad, por lo tanto hay mas mayores de edad",mayoredad);
- }
- if(mayoredad==25)
- {
- 	printf( "\nHay %d mayores de edad y %d menores de edad,  por lo tanto hay igual mayores de edad que de menores",mayoredad,50-mayoredad);
- }
- if(mayoredad<25)
- 	printf( "\nHay %d menores de edad, por lo tanto hay mas mayores de edad",50-mayoredad);
- 
-  return 0;  
+void verificarPersonas(int edades[]){
+	//Declaración de variables locales verificarPersonas()
+	int mayor = 0, menor = 0;
+	for( i=0; i<numeroEdades; i++ ){
+	    if(edades[i]>18){
+		mayor=mayor+1;
+		}
+	}
+	menor = numeroEdades-mayor;
+	printf( "\tEl numero de personas mayores de edad son: %d personas\n", mayor);
+	printf( "\tEl numero de personas menores de edad son: %d personas\n", menor);
+	if(mayor>25) {
+		printf( "\tHay %d mayores de edad, por lo tanto hay mas mayores de edad\n",mayor);
+	}
+ 	if(mayor==25){
+		printf( "\tHay %d mayores de edad y %d menores de edad,  por lo tanto hay igual mayores de edad que de menores\n",mayor,menor);
+	}
+	if(mayor<25){
+		printf( "\tHay %d menores de edad, por lo tanto hay mas mayores de edad\n",menor);
+	}
 }
    
    
