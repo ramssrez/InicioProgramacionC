@@ -1,3 +1,10 @@
+/*
+Encontrar el valor máximo de un conjunto de 10 números de entrada. Los cuales puedes
+generar de manera aleatoria con la función rand o introducirlos previamente.
+Diseña un programa que mediante sentencias de control en C, inspeccione el arreglo de
+entrada y determine su máximo, puedes también considerar ordenar el arreglo con un algoritmo
+de ordenación como la ordenación burbuja o inserción.
+*/
 #include <stdio.h>////Librería estándar de C para la entrada y salida del información
 #include <stdlib.h>//Librería que nos permite dar sentencias al sistema
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
