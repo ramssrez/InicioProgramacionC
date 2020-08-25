@@ -16,11 +16,15 @@ edad o si hay misma cantidad
 //Librería en donde esta la función srand, en el cual las edades van cambiando conforme vuelva a ejecutar el progrma
 #include <time.h>
 //Declaración de las variables globales del programa
-int numeroEdades = 10, i;
+int numeroEdades = 50, i;
 //Declaración de las funciones
+//Función que lee las edades de las personas
 void leerEdades(int edades[]);
+//Función que genera las edades con la función srand()
 void generadorEdades(int edades[]);
+//Función que calcula el promedio de edades
 float promedioEdades (int edades[]);
+//Función que verifica el número de personas
 void verificarPersonas(int edades[]);
 //Inicio de la función principal
 int main(){
@@ -32,9 +36,9 @@ int main(){
 	unsigned int edad[numeroEdades];
 	printf( "\n\t ********** Bienvenido al programa generador de edades **********\n\n" );
 	printf( "\n\t ********** Hacemos uso de la función rand() en C **********\n\n" );
-	leerEdades(edad);
+	//leerEdades(edad);
 	//Llamado a la función generarEdades()
-	//generadorEdades(edad);
+	generadorEdades(edad);
 	//Llamado a la función promedioEdades()
 	printf("\tEl promedio de edad es: %.0f años \n",promedioEdades (edad));
 	//Llamado a la función verificarPersonas()
