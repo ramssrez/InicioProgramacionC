@@ -3,7 +3,7 @@
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
 #include <wchar.h>
 #include <locale.h>
-int unsigned i,j;
+int i,j;
 int orden=0, opcion;
 int matriz [100][100];
 void registrarMatriz();
@@ -47,7 +47,7 @@ int main(){
         	case 3:
         		imprimirInicioOpcion(opcion);
         		valorMayor = valorMaximoMatriz();
-        		printf("El valor máximo de la matriz es: %d",valorMayor);
+        		printf("\tEl valor máximo de la matriz es: %d",valorMayor);
         		imprimirFinOpcion();
 				break;
         	case 4:
@@ -103,8 +103,18 @@ void validarOrden(){
 	}
 }
 int valorMaximoMatriz(){
-	int mayor;
-	mayor = 5;
+	int mayor=0;
+	if(orden<=1){
+		printf("No se han ingresado valores, el número mayor de la matriz es cero.\n");
+	}
+	for (i = 0; i<orden;i++){
+		for (j =0; j<orden;j++){
+			int valor = matriz[i][j];
+			if (valor>mayor){
+				mayor=valor;
+			}
+		}
+	}
 	return mayor;
 }
 void imprimirFinOpcion(){
