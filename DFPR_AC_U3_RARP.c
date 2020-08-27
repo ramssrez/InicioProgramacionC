@@ -1,23 +1,48 @@
+/*
+Diseñar un programa en C que contenga un menú principal (con estructura condicional
+switch case) para manipular un arreglo bidimensional de tipo Int definido de forma global
+(Matriz). Las opciones del menú a definir son:
+a. Registrar datos en Matriz
+b. Imprimir los datos guardados en la matriz
+c. Obtener el valor mayor guardado en la Matriz
+d. Opción para salir del programa
+Registrar datos en Matriz, debe ser declarada como función sin parámetros y sin devolver
+un valor (void).
+Imprimir los datos guardados en la matriz, debe ser declarada como función sin parámetros
+y sin devolver un valor (void).
+Obtener el valor mayor guardado en la Matriz, debe ser declarada como función sin
+parámetros y que devuelve un valor de tipo int para ser impreso por la variable que atrape
+dicho valor en el menú principal.
+Definir una opción para salir del programa, al seleccionar esta opción automáticamente el
+programa dejara de ejecutarse.
+*/
 #include <stdio.h>////Librería estándar de C para la entrada y salida del información
 #include <stdlib.h>//Librería que nos permite dar sentencias al sistema
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
 #include <wchar.h>
 #include <locale.h>
+//Declaración de las variables globales del programa, tanto los contadores como la dimensión de la matriz
 int i,j;
 int orden=0, opcion;
 int matriz [100][100];
+//Función que registra la matriz, donde se puede leer el orden de la matriz y la registra.
 void registrarMatriz();
+//Función que imprime la matriz que previamente se ingreso.
 void imprimirMatriz();
+//Función que valida el orden para la opción 2 del menú
 void validarOrden();
+//Función que regresa el valor máximo de una matriz
 int valorMaximoMatriz();
-void imprimirFinOpcion();
+//Función que imprime las cabeceras de las opciones que se han escogido
 void imprimirInicioOpcion();
+//Función que imprime el final de las opciones elegidas
+void imprimirFinOpcion();
+//Inicio de la función principal
 int main(){
 	//Método que nos permite el ingreso de caracteres especiales como los acentos
 	setlocale(LC_ALL, "");
 	//Declaración de variables locales.
 	int valorMayor;
-	//int opcion;
 	//Presentación del programa
 	printf(" ----------------------------------------------------------------------------------------------------------------- ");
     printf("\n\t ********** Bienvenido al sitema de areglos bidimensionales **********\n\n");  
@@ -35,22 +60,26 @@ int main(){
         //Uso de switch en el cual se agrega las opciones
         switch(opcion){
         	case 1:
+        		//Llamado de las funciones a utilizar
         		imprimirInicioOpcion(opcion);
         		registrarMatriz();
         	    imprimirFinOpcion();
         		break;
         	case 2:
+        		//Llamado de las funciones a utilizar
         		imprimirInicioOpcion(opcion);
         		validarOrden();
         		imprimirFinOpcion();
         		break;
         	case 3:
+        		//Llamado de las funciones a utilizar
         		imprimirInicioOpcion(opcion);
         		valorMayor = valorMaximoMatriz();
         		printf("\tEl valor máximo de la matriz es: %d",valorMayor);
         		imprimirFinOpcion();
 				break;
         	case 4:
+        		//Llamado de las funciones a utilizar
         		imprimirInicioOpcion(opcion);
         		printf("\n\t Usted acaba de salir del menú\n");
         		printf("\n\n **************************** Agradecemos si visita, vuelva pronto ****************************\n\n\t");
@@ -59,8 +88,8 @@ int main(){
 				return 0;
         		break;
         	default:
+        		//Llamado de las funciones a utilizar
         		imprimirInicioOpcion(opcion);
-        		printf("Caso distinto");
         		imprimirFinOpcion();
         		break;
         	
@@ -68,7 +97,8 @@ int main(){
 		}
 		
 	}while(opcion!=4);
-}
+} //Fin del program principal
+//Definición de funciones a utilizar
 void registrarMatriz(){
 	printf("Ingresa el orden de la matriz: ");
 	scanf("%d",&orden);
@@ -78,7 +108,7 @@ void registrarMatriz(){
 		for (i = 0; i<orden;i++){
 			for (j =0; j<orden;j++){
 				printf("\t");
-				printf("Elemento [%d,%d]: ", i,j);
+				printf("Ingresa elemento (%d,%d): ", i,j);
 				scanf("%d",&matriz[i][j]);
 			}
 		}
@@ -103,6 +133,7 @@ void validarOrden(){
 	}
 }
 int valorMaximoMatriz(){
+	//Declaración de variables locales
 	int mayor=0;
 	if(orden<=1){
 		printf("No se han ingresado valores, el número mayor de la matriz es cero.\n");
