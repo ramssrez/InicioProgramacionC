@@ -4,25 +4,35 @@
 //Librerías que nos permiten agregar caracteres especiales al texto de salida
 #include <wchar.h>
 #include <locale.h>
-//Declaracipon de variables 
+//Declaracipon de variables globales
 char frase[100];
 int i;
+//Función que realiza el contero de vocales minusculas
 int contadorVocalesMinusculas(char frase[]);
+//Función que realiza el conteo de vocales mayusculas
 int contadorVocalesMayusculas(char frase[]);
+//Función que realiza el conteo de espacios vacíos
 int contadorEspacios(char frase[]);
+//Función que realiza el conteo de tabuladores
 int contadorTabulador(char frase[]);
+//Función que realiza el conteo de caracteres especiales
 int contadorEspeciales(char frase[]);
+//Función que imprime el inicio de las opciones elegidas
 void imprimirInicioOpcion();
 //Función que imprime el final de las opciones elegidas
 void imprimirFinOpcion();
 //Inicio de la función principal
-int main (int argc, char const *argv[]){
+int main (){
 	//Método que nos permite el ingreso de caracteres especiales como los acentos
 	setlocale(LC_ALL, "");
-	int opcion;
-	
-	printf("Esto es una prueba");
+	//Declaración de variables locales.
+	int opcion,vocalesMay, vocalesMin,espacios,tabulador, especial;
+		//Presentación del programa
+	printf(" ----------------------------------------------------------------------------------------------------------------- ");
+    printf("\n\t **** Bienvenido al sitema de conteo de vocales, espacios, tabuladores y caracteres especiales(#$%&!¡?¿*) ****\n\n");  
+    //Inicio del ciclo while para nuestro menú.
 	do{
+		//Impresión de las opciones que se tienen en el menú
 		printf("\n\tSeleccione la opción de su preferencia \n\t");
         printf("\n\t1)Cadena de entrada.");
         printf("\n\t2)Número de vocales.");
@@ -31,47 +41,53 @@ int main (int argc, char const *argv[]){
         printf("\n\t5)Número de caracteres especiales.");
         printf("\n\t6)Salir del programa.");
         printf("\n\tEscribe la opción que deseas escoger: ");
+        //Lectura de la opción a elegir
 		scanf("%d",&opcion);
+		//Uso de switch en el cual se agrega las opciones
 		switch(opcion){
 			case 1:
+				//Llamado de las funciones a utilizar
 				imprimirInicioOpcion(opcion);
 				printf("Ingresa la cadena a estudiar: ");
 				gets(frase);
 				fgets(frase,100,stdin);
 				printf("La cadena es: %s",frase);
-				//scanf("%s",frase);
 				imprimirFinOpcion();
 				break;
 			case 2:
+				//Llamado de las funciones a utilizar
 				imprimirInicioOpcion(opcion);
-				int vocalesMin = contadorVocalesMinusculas(frase);
-				int vocalesMay = contadorVocalesMayusculas(frase);
+				vocalesMin = contadorVocalesMinusculas(frase);
+				vocalesMay = contadorVocalesMayusculas(frase);
 				printf("El número de vocales minusculas son: %d\n", vocalesMin);
 				printf("\tEl número de vocales mayusculas son: %d", vocalesMay);
 				imprimirFinOpcion();
 				break;
 			case 3:
+				//Llamado de las funciones a utilizar
 				printf("Caso 3");
 				imprimirInicioOpcion(opcion);
-				int espacios = contadorEspacios(frase);
+				espacios = contadorEspacios(frase);
 				printf("El número de espacios blancos son: %d", espacios);
 				imprimirFinOpcion();
 				break;
 			case 4:
+				//Llamado de las funciones a utilizar
 				printf("caso 4");
 				imprimirInicioOpcion(opcion);
-				int tabulador = contadorTabulador(frase);
+				tabulador = contadorTabulador(frase);
 				printf("El número de tabuladores son: %d", tabulador);
 				imprimirFinOpcion();
 				break;
 			case 5:
+				//Llamado de las funciones a utilizar
 				imprimirInicioOpcion(opcion);
-				int especial = contadorEspeciales(frase);
+				especial = contadorEspeciales(frase);
 				printf("El número de caracteres especiales son: %d", especial);
 				imprimirFinOpcion();
 				break;
 			case 6:
-					//printf("caso 5 ");
+				//Llamado de las funciones a utilizar
 				imprimirInicioOpcion(opcion);
         		printf("\n\t Usted acaba de salir del menú\n");
         		printf("\n\n **************************** Agradecemos si visita, vuelva pronto ****************************\n\n\t");
@@ -80,16 +96,17 @@ int main (int argc, char const *argv[]){
 				return 0;
 				break;
 			default:
+				//Llamado de las funciones a utilizar
 				printf("Caso default");
 				imprimirInicioOpcion(opcion);
 				imprimirFinOpcion();
 				break;
 		}
-	}while(opcion!=6
-	);
-	
-}
+	}while(opcion!=6);	
+}//Fin de la función principal
+//Definición de funciones a utilizar
 int contadorVocalesMinusculas(char frase[]){
+	//Declaración de variables locales
 	int vocalesMin=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
@@ -100,6 +117,7 @@ int contadorVocalesMinusculas(char frase[]){
 	return vocalesMin;
 }
 int contadorVocalesMayusculas(char frase[]){
+	//Declaración de variables locales
 	int vocalesMay=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
@@ -110,6 +128,7 @@ int contadorVocalesMayusculas(char frase[]){
 	return vocalesMay;
 }
 int contadorEspacios(char frase[]){
+	//Declaración de variables locales
 	int espacios=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
@@ -121,6 +140,7 @@ int contadorEspacios(char frase[]){
 }
 
 int contadorTabulador(char frase[]){
+	//Declaración de variables locales
 	int tabulador=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
@@ -131,10 +151,12 @@ int contadorTabulador(char frase[]){
 	return tabulador;
 }
 int contadorEspeciales(char frase[]){
+	//Declaración de variables locales
 	int especial=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
-		if (letraActual == '%'||letraActual=='&'||letraActual=='#'||letraActual=='$'){
+		if (letraActual == '%'||letraActual=='&'||letraActual=='#'||letraActual=='$'
+		||letraActual=='?'||letraActual=='¿'||letraActual=='*'||letraActual=='!'||letraActual=='¡'){
 			especial++;
 		}
 	}
