@@ -47,6 +47,7 @@ int main(){
 	printf(" ----------------------------------------------------------------------------------------------------------------- ");
     printf("\n\t ********** Bienvenido al sitema de areglos bidimensionales **********\n\n");  
     //Inicio del ciclo while para nuestro menú.
+   
 	do{
 		//Impresión de las opciones que se tienen en el menú
     	printf("\n\tSeleccione la opción de su preferencia \n\t");
