@@ -11,13 +11,13 @@ void imprimirTotal(int estado[]);
 //Función que nos permite calcular el promedio
 float promedioInfectados(int estado[]);
 //Función que nos permite calcular la varianza de la muestra
-float varianzaMuestra(int estado[]);
+float varianzaMuestra(float promedio, int estado[]);
 //Inicio de la función principal
 int main (){
 	//Método que nos permite el ingreso de caracteres especiales como los acentos
 	setlocale(LC_ALL, "");
 	//Declaración de variables locales obtenido de https://coronavirus.gob.mx/datos/#DownZCSV
-	int estadoMexico[10]={749,690,573,585,218,193,652,562,630,514};
+	int estadoMexico[]={749,690,573,585,218,193,652,562,630,514};
 	int poblacion = 17427790;
 	int i;
 	float promedio,varianza;
@@ -30,7 +30,7 @@ int main (){
 	//Llamado de las funciones a utilizr
 	imprimirTotal(estadoMexico);
 	promedio= promedioInfectados(estadoMexico);
-	varianza=varianzaMuestra(estadoMexico);
+	varianza=varianzaMuestra(promedio,estadoMexico);
 	printf("\n\t\tPromedio de infectados es: %.2f personas por día \n", promedio);
 	printf("\t\tVarianza de la muestra es: %.1f\n", varianza);
 	printf("\t\tLa desviación estandar es: %.1f\n\n",sqrt(varianza));
@@ -40,7 +40,7 @@ int main (){
 }
 //Declaración de las funciones a utilizar
 void imprimirTotal(int estado[]){
-	printf("\t\tTotal de infectados de infectados por COVID-19: \n");
+	printf("\t\tTotal de infectados por COVID-19: \n");
 	for (i=0; i<10;i++){
 		printf("\t\t\t%d de julio: %d infectados.\n",(i+21),estado[i]);
 	}
@@ -48,17 +48,16 @@ void imprimirTotal(int estado[]){
 float promedioInfectados(int estado[]){
 	float suma=0;
 	for (i=0; i<10;i++){
-		suma =suma+estado[i];
+		suma +=estado[i];
 	}
 	return suma/10;
 }
-float varianzaMuestra(int estado[]){
-	float promedio = promedioInfectados(estado);
-	float total, suma=0,cuadrado,varianza;
+float varianzaMuestra(float promedio, int estado[]){
+	float total,suma=0,cuadrado,varianza;
 	for (i=0; i<10;i++){
 		total=estado[i]-promedio;
 		cuadrado=total*total;
-		suma=suma+cuadrado;
+		suma+=cuadrado;
 	}
 	varianza=suma/9;
 	return varianza;
