@@ -48,7 +48,7 @@ int main (){
 			case 1:
 				//Llamado de las funciones a utilizar
 				imprimirInicioOpcion(opcion);
-				printf("Ingresa la cadena a estudiar: ");
+				printf("Ingresa la frase que deseas ingresar: ");
 				gets(frase);
 				fgets(frase,100,stdin);
 				printf("La cadena es: %s",frase);
@@ -59,13 +59,12 @@ int main (){
 				imprimirInicioOpcion(opcion);
 				vocalesMin = contadorVocalesMinusculas(frase);
 				vocalesMay = contadorVocalesMayusculas(frase);
-				printf("El número de vocales minusculas son: %d\n", vocalesMin);
-				printf("\tEl número de vocales mayusculas son: %d", vocalesMay);
+				printf("El número de vocales minúsculas son: %d\n", vocalesMin);
+				printf("\tEl número de vocales mayúsculas son: %d", vocalesMay);
 				imprimirFinOpcion();
 				break;
 			case 3:
 				//Llamado de las funciones a utilizar
-				printf("Caso 3");
 				imprimirInicioOpcion(opcion);
 				espacios = contadorEspacios(frase);
 				printf("El número de espacios blancos son: %d", espacios);
@@ -73,7 +72,6 @@ int main (){
 				break;
 			case 4:
 				//Llamado de las funciones a utilizar
-				printf("caso 4");
 				imprimirInicioOpcion(opcion);
 				tabulador = contadorTabulador(frase);
 				printf("El número de tabuladores son: %d", tabulador);
@@ -121,7 +119,7 @@ int contadorVocalesMayusculas(char frase[]){
 	int vocalesMay=0;
 	for (i=0;frase[i]!='\n';i++){
 		char letraActual = frase[i];
-		if (letraActual == 'A'||letraActual=='B'||letraActual=='C'||letraActual=='D'||letraActual=='E'){
+		if (letraActual == 'A'||letraActual=='E'||letraActual=='I'||letraActual=='O'||letraActual=='U'){
 			vocalesMay++;
 		}
 	}
