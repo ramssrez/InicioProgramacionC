@@ -53,7 +53,7 @@ void del(stack *pila){
 	if(!vacia(pila)){
 		int temporal = pila->tope;
 		pila->tope--;
-		printf("Si se extrajo elemento \n",temporal);
+		printf("Si se extrajo elemento \n",pila->vector[temporal]);
 	}else{
 		printf("La pila estaba vacia \n");
 	}
@@ -61,18 +61,25 @@ void del(stack *pila){
 
 //Funcion para obtener el ultimo valor
 int ultimo(stack *pila){
-	return pila->vector[pila->tope];
+	if(vacia(pila)){
+		return pila->vector[pila->tope];
+	}else{
+		printf("ERROR la pila estaba vacia \n");
+		return false;
+	}
+	
 }
 
 int main(){
 	stack pila;
 	crearPila(&pila);
+	/*
 	add(&pila,5);
 	add(&pila,22);
 	add(&pila,4);
 	add(&pila,9);
 	add(&pila,50);
-	
+	*/
 	printf("El ultimo valor de la pila es: %d \n",pila.tope);
 	printf("El ultimo valor de la pila es: %d \n",pila.vector[pila.tope]);
 	printf("El ultimo valor con función de la pila es: %d \n",ultimo(&pila));
