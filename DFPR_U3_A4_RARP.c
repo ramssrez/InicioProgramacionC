@@ -1,92 +1,94 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#define true 1
-#define false 0
-#define maxArray 30
+#include <stdio.h>////Librería estándar de C para la entrada y salida del información
+#include <stdlib.h>//Librería que nos permite dar sentencias al sistema
+//Librerías que nos permiten agregar caracteres especiales al texto de salida
+#include <wchar.h>
+#include <locale.h>
+//Definición de las variables constantes
+#define TRUE 1
+#define FALSE 0
+#define MAXIMOARRAY 100
 //Declaración de la pila con la palabra reservada struct
-typedef struct {
-	//char nombre[20];
-	//int id;
-	//char apellido[20];
-	int tope; //Ultimo elemento que entra
-	int vector [maxArray];
+struct stack{
+	int tope; //Ultimo elemento del la estructura
+	int vector [MAXIMOARRAY]; //Vector que contabilliza las posiciones
 		
-}stack; //nombre de la estructura
+}; //nombre de la estructura
 
-//Con esta función se crea la pila pasando estructura llamada pila
-void crearPila(stack *pila){
+//Función que crea una pila, asgnandole el número -1 para su creación
+void crearPila(struct stack *pila){
 	pila->tope = -1;
 }
 
-//Dice si esta vacia una pila
-int vacia(stack *pila){
+//Función que nos dice si una pila esta vacia
+int pilaVacia(struct stack *pila){
 	//Esto es para ver si esta vacía o no
 	if (pila->tope == -1){
-		return true;
+		return TRUE;
 	}else{
-		return false;
+		return FALSE;
 	}
 }
-//Dice si esta llena la pila
-int llena(stack *pila){
-	if(pila->tope ==(maxArray-1)){
-		return true;		
+//Función que nos dice si una pila esta llena
+int pilaLlena(struct stack *pila){
+	if(pila->tope ==(MAXIMOARRAY-1)){
+		return TRUE;		
 	}else{
-		return false;
+		return FALSE;
 	}
 }
 
 //Función que agrega una pila cuando no este llena
-void add(stack *pila, int n){
-	if(!llena(pila)){
+void agregarPila(struct stack *pila, int numero){
+	if(!pilaLlena(pila)){
 		pila->tope++;
-		pila->vector[pila->tope]=n;
-		printf("Se ha ingresado: %d \n",pila->vector[pila->tope]);		
-		
+		pila->vector[pila->tope] = numero;
+		//printf("Se ha eliminado un elemento : %i \n",pila->vector[pila->tope]);	
+		printf("Se ha agregado el elemento : %i \n",pila->vector[pila->tope]);					
 	}else{
 		printf("¡¡¡La pila esta llena!!!\n");
 	}
 }
 //Función que elimina una pila cuando no este vacia
-void del(stack *pila){
-	if(!vacia(pila)){
+void eliminarPila(struct stack *pila){
+	if(!pilaVacia(pila)){
 		int temporal = pila->tope;
 		pila->tope--;
-		printf("Si se extrajo elemento \n",pila->vector[temporal]);
+		printf("Se extrajo el  elemento: %d \n",pila->vector[temporal]);
 	}else{
-		printf("La pila estaba vacia \n");
+		printf("La pila ya estaba vacia \n");
 	}
 }
 
 //Funcion para obtener el ultimo valor
-int ultimo(stack *pila){
-	if(vacia(pila)){
+int ultimoPila(struct stack *pila){
+	if(!pilaVacia(pila)){
 		return pila->vector[pila->tope];
 	}else{
-		printf("ERROR la pila estaba vacia \n");
-		return false;
+		printf("ERROR la pila ya estaba vacia, se regresa 0 \n");
+		return FALSE;
 	}
 	
 }
 
 int main(){
-	stack pila;
+	//Método que nos permite el ingreso de caracteres especiales como los acentos
+	setlocale(LC_ALL, "");
+	//Declaración de pila a usar
+	struct stack pila;
+	//Creación de la pila
 	crearPila(&pila);
-	/*
-	add(&pila,5);
-	add(&pila,22);
-	add(&pila,4);
-	add(&pila,9);
-	add(&pila,50);
-	*/
-	printf("El ultimo valor de la pila es: %d \n",pila.tope);
-	printf("El ultimo valor de la pila es: %d \n",pila.vector[pila.tope]);
-	printf("El ultimo valor con función de la pila es: %d \n",ultimo(&pila));
-	del(&pila);
-	printf("El ultimo valor con función de la pila es: %d \n",ultimo(&pila));
-
-	printf("Hola mundo desde C");
+	//Agregado el valor de la pila
+	printf( "\n\t ********** Bienvenido al programa que usa una pila en C, crear, agregar y eliminar **********\n\n" );
+	printf("Agregando valor a la pila \n");
+	agregarPila(&pila,5);
+	agregarPila(&pila,10);
 	
-	return true;
+	printf("El ultimo valor de la pila es: %d \n",ultimoPila(&pila));
+	eliminarPila(&pila);
+	printf("El ultimo valor de la pila es: %d \n",ultimoPila(&pila));
+	eliminarPila(&pila);
+	printf("El ultimo valor de la pila es: %d \n",ultimoPila(&pila)); 
+	printf("\n\n ------------------------------------------------------------------------------------------------------ \n\n");
+	system("pause");
+	return FALSE;
 }
