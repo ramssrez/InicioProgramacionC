@@ -5,18 +5,18 @@
 #include <time.h>
 
 using namespace std;
-int pila[9], tope = -1;
+int cola[9], final = -1;
 
-bool pilaVacia(){
-	if(tope == -1){
+bool colaVacia(){
+	if(final == -1){
 		return true;
 	}else{
 		return false;
 	}	
 }
 
-bool  pilaLlena(){
-	if(tope >= 9){
+bool  colaLlena(){
+	if(final >= 9){
 		return true;
 	}else{
 		return false;
@@ -26,10 +26,10 @@ bool  pilaLlena(){
 void validacionVacia(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 1" <<endl;
-	if(pilaVacia()){
-		cout<<"La Pila esta vacía" <<endl;
+	if(colaVacia()){
+		cout<<"La Cola esta vacía" <<endl;
 	}else{
-		cout<<"La Pila no esta vacía, hay " <<(tope+1) <<" elemento(s)" <<endl;
+		cout<<"La Cola no esta vacía, hay " <<(final+1) <<" elemento(s)" <<endl;
 	}
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	system("pause");	
@@ -38,91 +38,93 @@ void validacionVacia(){
 void validacionLlena(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 2" <<endl;
-	if(pilaLlena()){
-		cout<<"La Pila esta Llena"<<endl;
+	if(colaLlena()){
+		cout<<"La Cola esta Llena"<<endl;
 	}else{
-		cout<<"La Pila no esta llena, hay " <<(10-(tope+1)) <<" espacio(s) disponible(s)" <<endl;
+		cout<<"La Cola no esta llena, hay " <<(10-(final+1)) <<" espacio(s) disponible(s)" <<endl;
 	}
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	system("pause");				
 }
 
-void insertarPila(){
-	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-	cout << "Elegiste la opción 3" <<endl;
-	if(!pilaLlena()){
-		cout <<"Ingresa un número para la Pila: ";
-		int dato;
-		cin>> dato;
-		pila[tope+1]=dato;
-		tope = tope + 1;
-		cout << "Se ha ingresado " <<dato <<" a la Pila" <<endl;
-	}else{
-		cout<<"La Pila esta llena, no se puede ingresar datos"<<endl;
-	}
-	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-}
-
-void eliminarPila(){
-	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-	cout << "Elegiste la opción 4" <<endl;
-	if(!pilaVacia()){
-		int eliminado = pila[tope];
-		tope = tope -1;
-		cout<<"Se ha eliminado el elemento " <<eliminado <<" de la Pila" <<endl;
-	}else{
-		cout<<"La Pila esta vacía, no se puede eliminar elementos" <<endl;
-	}
-	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-	system("pause");
-}
-
-void mostrarPila(){
+void mostrarCola(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 5" <<endl;
-	if(!pilaVacia()){
-		cout <<" La Pila es la siguiente: " <<endl;
-		cout << "Fin Pila [ ";
-		for(int i =0; i < (tope+1); i++){
-			cout <<pila[(tope-1)-i+1] << " ";
+	if(!colaVacia()){
+		cout <<" La Cola es la siguiente: " <<endl;
+		cout << "Fin Cola [ ";
+		for(int i =0; i < (final+1); i++){
+			cout <<cola[(final-1)-i+1] << " ";
 		}
-		cout << "] Inicio Pila" <<endl;
+		cout << "] Inicio Cola" <<endl;
 	}else{
-		cout<<"La Pila esta vacía, no se pueden mostrar los datos"<<endl;
+		cout<<"La Cola esta vacía, no se pueden mostrar los datos"<<endl;
 	}
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	system("pause");
 }
 
-void pilaAleatorio(){
-	int num; 
-	srand(time(NULL));
-    for(int i = 0; i < 10; i++)
-    {
-        num = 1 + rand() % (51 - 1);
-        pila[i] = num;
-    }
-    tope=9;
+void insertarCola(){
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	cout << "Elegiste la opción 3" <<endl;
+	if(!colaLlena()){
+		cout <<"Ingresa un número para la Cola: ";
+		int dato;
+		cin>> dato;
+		cola[final+1]=dato;
+		final = final + 1;
+		cout << "Se ha ingresado " <<dato <<" a la Cola" <<endl;
+	}else{
+		cout<<"La Cola esta llena, no se puede ingresar datos"<<endl;
+	}
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 }
 
-int main()
-{
+void eliminarCola(){
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	cout << "Elegiste la opción 4" <<endl;
+	if(!colaVacia()){
+		int eliminado = cola[0];
+				cout<<"Se ha eliminado el elemento " <<eliminado <<" de la Cola" <<endl;
+		
+		for(int i = 0; i < (final); i++){
+        cola[i] = cola[i+1];
+    	}
+    	final = final -1;
+	}else{
+		cout<<"La Cola esta vacía, no se puede eliminar elementos" <<endl;
+	}
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	system("pause");
+}
+
+void colaAleatorio(){
+	int num; 
+	srand(time(NULL));
+    for(int i = 0; i < 10; i++){
+        num = 1 + rand() % (51 - 1);
+        cola[i] = num;
+    }
+    final=9;
+}
+
+int main(){
     int opcion;
     bool repetir = true;
     
     
     do {
     	setlocale(LC_ALL, "");
-    	
-        cout << "\n\nMenú de Opciones para el ejercicio sobre las Pilas en un programa en C++" << endl <<endl;
+
+        cout << "\n\nMenú de Opciones para el ejercicio sobre las Colas en un programa en C++" << endl <<endl;
         cout <<"Selecciona alguna de las siguientes opciones que se muestra a continuación " <<endl;
-        cout << "1. Verificar si la Pila esta vacía" << endl;
-        cout << "2. Verificar si la Pila esta llena" << endl;
-        cout << "3. Insertar un elemento en la Pila" << endl;
-        cout << "4. Quitar un elemento de la Pila" << endl;
-        cout << "5. Mostrar los elementos de la Pila" << endl;
-        cout << "6. Medir el tamaño de la Pila" <<endl;
-        cout << "7. Generar un Pila con números aleatorios" <<endl;
+        cout << "1. Verificar si la Cola esta vacía" << endl;
+        cout << "2. Verificar si la Cola esta llena" << endl;
+        cout << "3. Insertar un elemento en la Cola" << endl;
+        cout << "4. Quitar un elemento de la Cola" << endl;
+        cout << "5. Mostrar los elementos de la Cola" << endl;
+        cout << "6. Medir el tamaño de la Cola" <<endl;
+        cout << "7. Generar un Cola con números aleatorios" <<endl;
         cout << "8. SALIR" << endl;
         
         cout << "\nIngrese una opcion: ";
@@ -138,27 +140,27 @@ int main()
                 break;
                 
             case 3:
-            	insertarPila();
+            	insertarCola();
                 break;
                 
             case 4:                            
-                eliminarPila();                               
+                eliminarCola();                               
                 break;
             
             case 5:
-                mostrarPila();
+                mostrarCola();
             	break;
             	
             case 6:
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-				cout<< "La Pila solo se pueden ingresar 10 elementos, en este momento el tamaño de la Pila es: " <<(tope + 1) <<endl;
+				cout<< "La Cola solo se pueden ingresar 10 elementos, en este momento el tamaño de la Cola es: " <<(final + 1) <<endl;
 				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
             	break;
             	
             case 7:
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-            	cout << "Se ha creado una Pila con números aleatorios entre el 1 al 5, selecciona la opción 50 para observar la Pila." <<endl;
-            	pilaAleatorio();
+            	cout << "Se ha creado una Cola con números aleatorios entre el 1 al 50, selecciona la opción 5 para observar la Cola." <<endl;
+            	colaAleatorio();
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
             	break;
             	
@@ -179,5 +181,4 @@ int main()
     } while (repetir);
     return 0;
 }
-
 
