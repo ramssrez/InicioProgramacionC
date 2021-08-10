@@ -5,6 +5,37 @@
 #include <time.h>
 
 using namespace std;
+int arreglo[9], aleatorio, valorArreglo=-1;
+
+void numeroAleatorio(){
+	srand(time(NULL));
+	aleatorio = 1 + rand() % (101-0);
+}
+
+void impresionArreglo(){
+	if(valorArreglo == -1){
+		cout<<"El arreglo esta vacío, selecciona la opción 1";
+	}else{
+		cout << "[ ";
+		for(int i = 0; i<10; i++){
+			cout <<arreglo[i] << " ";
+		}
+		cout << "] " <<endl;
+	}
+}
+
+void arregloAleatorio(){
+	int num; 
+	srand(time(NULL));
+    for(int i = 0; i < 10; i++)
+    {
+        num = 1 + rand() % (101 - 0);
+        arreglo[i] = num;
+        cout <<arreglo[i] << " ";
+    }
+    valorArreglo = 9;
+}
+
 int main(){
 	int opcion;
     bool repetir = true;
@@ -13,12 +44,12 @@ int main(){
     do {
     	setlocale(LC_ALL, "");
     	
-        cout << "\n\nMenú de Opciones para el ejercicio sobre las Pilas en un programa en C++" << endl <<endl;
+        cout << "\n\nMenú de Opciones para el ejercicio de busqueda líneal en C++" << endl <<endl;
         cout <<"Selecciona alguna de las siguientes opciones que se muestra a continuación " <<endl;
-        cout << "1. Verificar si la Pila esta vacía" << endl;
-        cout << "2. Verificar si la Pila esta llena" << endl;
-        cout << "3. Insertar un elemento en la Pila" << endl;
-        cout << "4. Quitar un elemento de la Pila" << endl;
+        cout << "1. Generación de arreglo con números aleatorios del 0 al 100" << endl;
+        cout << "2. Generación de número aleatorio del 0 al 100" << endl;
+        cout << "3. Mostrar arreglo y número a buscar" << endl;
+        cout << "4. Salir" << endl;
         cout << "5. Mostrar los elementos de la Pila" << endl;
         cout << "6. Medir el tamaño de la Pila" <<endl;
         cout << "7. Generar un Pila con números aleatorios" <<endl;
@@ -28,19 +59,24 @@ int main(){
         
         switch (opcion) {
             case 1:                
-                //validacionVacia();
+                arregloAleatorio();
                 break;
                 
             case 2:
             	//validacionLlena();
+            	numeroAleatorio();
+            	cout<<aleatorio;
                 break;
                 
             case 3:
-            	//insertarPila();
+            	impresionArreglo();
                 break;
                 
             case 4:                            
-                //eliminarPila();                               
+                cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	cout << "Gracias por usar este programa." <<endl;
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+               	repetir = false;                           
                 break;
             
             case 5:
@@ -55,7 +91,7 @@ int main(){
             	
             case 7:
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-            	cout << "Se ha creado una Pila con números aleatorios entre el 1 al 5, selecciona la opción 50 para observar la Pila." <<endl;
+            	cout << "Se ha creado una Pila con números aleatorios entre el 0 al 100, selecciona la opción 5 para observar la Pila." <<endl;
             	//pilaAleatorio();
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
             	break;
