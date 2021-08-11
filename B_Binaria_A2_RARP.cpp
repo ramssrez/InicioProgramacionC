@@ -118,7 +118,7 @@ void opcionCuatro(){
 		cout<<"Las iteraciones realizadas fueron: " <<iteracion << " iteraciones" <<endl;
 		banderaIteracion = false;
 	}else{
-		cout<<"No se ha realizado una busqueda" << endl;
+		cout<<"No se tienen información de las iteraciones realizadas" << endl;
 	}
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 
