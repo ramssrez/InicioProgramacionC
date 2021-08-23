@@ -5,7 +5,7 @@
 #include <time.h>
 using namespace std;
 //Declaración de varaibles globales 
-int maximo = 5, mitad;
+int maximo = 5, mitad, maximoClaudia, maximoJuan;
 int sueldoClaudia[5], sueldoJuan[5];
 bool banderaSalario = false, banderaBusquedaClaudia = false, banderaBusquedaJuan = false, banderaOrdenamiento = false;
 string juan = "Juan", claudia = "Claudia";
@@ -15,12 +15,12 @@ int arreglo[] = {1859,8971,1528,2659,2581};
 //Funciones que crea el arreglo
 void ingresarSueldo(int arreglo[], string nombre);
 //Función que imprime el arreglo creado
-void impresionArreglo(int arreglo[]);
+void impresionArreglo(int arreglo[], int maximo);
 //Métodos de ordenamiento 
-void ordenamientoBurbuja(int arreglo[]);
+void ordenamientoBurbuja(int arreglo[], int maximo);
 void ordenamientoQuicksort(int A[], int izq, int der);
-void ordenamientoInsercion(int arreglo[]);
-void ordenamientoSeleccion(int arreglo[]);
+void ordenamientoInsercion(int arreglo[], int maximo);
+void ordenamientoSeleccion(int arreglo[], int maximo);
 //Declaración de las funciones donde se imprimen los menús que se utilizan en el programa
 void menuOrdenamiento();
 void menuPricipal();
@@ -41,9 +41,9 @@ void opcionUnoPersona();
 void opcionDosPersona();
 
 //Declaración de la función que realiza la busqueda por medio de método de busqueda binaria.
-void busquedaBinaria(int dato, int arreglo[], string nombre);
+void busquedaBinaria(int dato, int arreglo[], string nombre, int maximoUso);
 
-void eliminarDuplicado(int arreglo[]);
+int eliminarDuplicado(int arreglo[], int maximo);
 //Declaración de la función principal
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
@@ -234,6 +234,9 @@ void menuSeleccionPersona(){
 void opcionUnoPrincipal(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 1" <<endl;
+	//Declaración de los maximos que se necesitan por si cambian a lo largo de la ejecución del programa
+	maximoClaudia = maximo;
+	maximoJuan = maximo;
 	cout<<"Salario de Claudia"<<endl;
 	//llamada a la función para ingresar los sueldos de Claudia
 	ingresarSueldo(sueldoClaudia, claudia);
@@ -255,11 +258,11 @@ void opcionDosPrincipal(){
 	if(banderaSalario){
 		cout<<"Salario de Claudia"<<endl;
 		//Llamado a la función que permite la impresión de sueldo de Claudia
-		impresionArreglo(sueldoClaudia);
+		impresionArreglo(sueldoClaudia, maximoClaudia);
 		cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 		cout<<"Salario de Juan"<<endl;
 		//Llamado a la función que permite la impresión de sueldo de Juan
-		impresionArreglo(sueldoJuan);
+		impresionArreglo(sueldoJuan, maximoJuan);
 		cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	}else{ // En caso de que no hayan ingresado sueldos a los arreglos se le notifica al usuario
 		cout<<"No se han registrado los salarios de Claudia y Juan, selecciona la opción 1" <<endl;
@@ -301,14 +304,14 @@ void opcioncuatroPrincipal(){
 		//menuOrdenamiento();
 		//Bandera que indica que ya se han ordenado los sueldos de Claudia y juan
 		//banderaOrdenamiento = true;
-		impresionArreglo(sueldoClaudia); 
-		eliminarDuplicado(sueldoClaudia);
-		impresionArreglo(sueldoClaudia); 
-		maximo = 5;   
-		impresionArreglo(sueldoJuan); 
-		eliminarDuplicado(sueldoJuan);
-		impresionArreglo(sueldoJuan);
-		maximo = 5;
+		//impresionArreglo(sueldoClaudia, maximoClaudia); 
+		maximoClaudia = eliminarDuplicado(sueldoClaudia, maximoClaudia);
+		impresionArreglo(sueldoClaudia, maximoClaudia); 
+		cout << "Se han eliminado los sueldos repetidos de Claudia" <<endl;  
+		//impresionArreglo(sueldoJuan, maximoJuan); 
+		maximoJuan = eliminarDuplicado(sueldoJuan, maximoJuan);
+		impresionArreglo(sueldoJuan, maximoJuan);
+		cout << "Se han eliminado los sueldos repetidos de Juan " << endl;
 	}else{// En caso de que no hayan ingresado sueldos a los arreglos se le notifica al usuario
 		cout<<"No se han registrado los salarios de Claudia y Juan, selecciona la opción 1" <<endl;
 		cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
@@ -348,7 +351,7 @@ void opcionUnoPersona(){
 	int dato;//Declaración de variable local para ingresar el sueldo a buscar
 	cout << "Ingresa el salario a buscar: ";
 	cin >> dato;//Lectura del sueldo para realizar la busqueda
-	busquedaBinaria(dato, sueldoClaudia, claudia); // LLamado a la función para realizar la busqueda de sueldo
+	busquedaBinaria(dato, sueldoClaudia, claudia, maximoClaudia); // LLamado a la función para realizar la busqueda de sueldo
 	//Validación para el caso de que se haya encontrado un sueldo
 	if(banderaBusquedaClaudia){
 		//Mensaje de confirmación para el caso de que se haya encontrado un sueldo
@@ -368,7 +371,7 @@ void opcionDosPersona(){
 	int dato; //Declaración de variable local para ingresar el sueldo a buscar
 	cout << "Ingresa el salario a buscar: ";
 	cin >> dato;//Lectura del sueldo para realizar la busqueda
-	busquedaBinaria(dato, sueldoJuan, juan);// LLamado a la función para realizar la busqueda de sueldo
+	busquedaBinaria(dato, sueldoJuan, juan, maximoClaudia);// LLamado a la función para realizar la busqueda de sueldo
 	//Validación para el caso de que se haya encontrado un sueldo
 	if(banderaBusquedaJuan){
 		//Mensaje de confirmación para el caso de que se haya encontrado un sueldo
@@ -386,16 +389,16 @@ void opcionUnoOrdenamiento(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 1, ordenamiento por el método de burbuja" <<endl;
 	cout << "Arreglo de Claudia antes de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia); //LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoBurbuja(sueldoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoClaudia, maximoClaudia); //LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoBurbuja(sueldoClaudia, maximoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Claudia despues de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Arreglo de Juan antes de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoBurbuja(sueldoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoJuan, maximoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoBurbuja(sueldoJuan, maximoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Juan despues de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoJuan, maximoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout<< "Se han ordenado los vectores por el método burbuja" <<endl;
 }
@@ -405,16 +408,16 @@ void opcionDosOrdenamiento(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 2, ordenamiento por el método de Insersión" <<endl;
 	cout << "Arreglo de Claudia antes de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoInsercion(sueldoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoInsercion(sueldoClaudia, maximoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Claudia despues de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Arreglo de Juan antes de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoInsercion(sueldoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoInsercion(sueldoJuan, maximoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Juan despues de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout<< "Se han ordenado los vectores por el método de Insersión" <<endl;
 }
@@ -424,16 +427,16 @@ void opcionTresOrdenamiento(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 3, ordenamiento por el método de Selección" <<endl;
 	cout << "Arreglo de Claudia antes de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoSeleccion(sueldoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoSeleccion(sueldoClaudia, maximoClaudia);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Claudia despues de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Arreglo de Juan antes de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoSeleccion(sueldoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoSeleccion(sueldoJuan, maximoJuan);//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Juan despues de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout<< "Se han ordenado los vectores por el método de Selección" <<endl;
 }
@@ -443,16 +446,16 @@ void opcionCuatroOrdenamiento(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Elegiste la opción 4, ordenamiento por el método de QuickSort" <<endl;
 	cout << "Arreglo de Claudia antes de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoQuicksort(sueldoClaudia,0,(maximo-1));//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoClaudia, maximoClaudia);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoQuicksort(sueldoClaudia,0,(maximoClaudia-1));//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Claudia despues de ordenar " <<endl;
-	impresionArreglo(sueldoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoClaudia,maximoClaudia);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout << "Arreglo de Juan antes de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
-	ordenamientoQuicksort(sueldoJuan,0,(maximo-1));//LLamado a la función para realizar el ordenamiento correspondiente
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos antes de ordenar
+	ordenamientoQuicksort(sueldoJuan,0,(maximoJuan-1));//LLamado a la función para realizar el ordenamiento correspondiente
 	cout << "Arreglo de Juan despues de ordenar " <<endl;
-	impresionArreglo(sueldoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
+	impresionArreglo(sueldoJuan,maximoJuan);//LLamada a la función para impresión del arreglos despues de ordenar
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 	cout<< "Se han ordenado los vectores por el método de QuickSort" <<endl;
 }
@@ -474,7 +477,7 @@ void ingresarSueldo(int arreglo[], string nombre){
 }
 
 //Función para la impresión del arreglo en general
-void impresionArreglo(int arreglo[]){
+void impresionArreglo(int arreglo[], int maximo){
 	cout << "[ ";
 	//Ciclo for en donde se realiza la impresión de los datos en función del tamaño del arreglo
 	for(int i = 0; i < maximo; i++)
@@ -486,7 +489,7 @@ void impresionArreglo(int arreglo[]){
 }
 
 //Función para el ordenamiento burbuja, se necesita el ingreso del arreglo a ordenar
-void ordenamientoBurbuja(int arreglo[]){
+void ordenamientoBurbuja(int arreglo[], int maximo){
 	//Declaración de la variable auxiliar
 	int aux;
 	//Ciclo for que recorre las posiciones del arreglo
@@ -507,7 +510,7 @@ void ordenamientoBurbuja(int arreglo[]){
 }
 
 //Fucnión par el ordenamiento por insersion, se necesita el ingreso del arreglo a ordenar
-void ordenamientoInsercion(int arreglo[]){
+void ordenamientoInsercion(int arreglo[], int maximo){
 	//Declaración de variables de apoyo
 	int pos, aux;
 	//Ciclo for que realiza el recorrido de las posiciones del arreglo
@@ -530,7 +533,7 @@ void ordenamientoInsercion(int arreglo[]){
 }
 
 //Función ordenamiento por Selección, se neesita el ingreso del arreglo a ordenar
-void ordenamientoSeleccion(int arreglo[]){
+void ordenamientoSeleccion(int arreglo[], int maximo){
 	//Declaración de variables de apoyo
 	int min, aux;
 	//Ciclo for que realiza el recorrido de las posiciones del arreglo
@@ -609,10 +612,10 @@ void ordenamientoQuicksort(int arreglo[], int izq, int der){
 }
 
 //Función para la búusqueda binaria
-void busquedaBinaria(int dato, int arreglo[], string nombre){
+void busquedaBinaria(int dato, int arreglo[], string nombre, int maximoUso){
 	//Declaración de variables de apoyo
 	int inferior = 0;
-	int superior = maximo;
+	int superior = maximoUso;
 	int iteracion = 1;
 	//ciclo while que realiza el recorrido del arreglo
 	while((inferior <= superior)&&(iteracion<=20)){
@@ -650,31 +653,23 @@ void busquedaBinaria(int dato, int arreglo[], string nombre){
 }
 
 //Función para la eliminación de sueldos duplicados
-void eliminarDuplicado(int arreglo[]){
+int eliminarDuplicado(int arreglo[], int maximo){
 	for(int i=0; i<(maximo-1); i++)
         for(int j=i+1; j<maximo; j++) {
             //Sentencia par el caso de que se encuentre un duplicado
             if(arreglo[i] == arreglo[j]) {
-
-                //Se intercambia para quede hasta el final
+                //Se intercambia para quede hasta el final el valor repetido
                 for(int k=j;k<(maximo-1);k++)
 					swap(arreglo[k], arreglo[k+1]); //Función que permite el intercambio de valores de un arreglo
-				
-                   
-
-                ///Disminuimos la longitud en 1, lo que significa
-                ///que se elimina un elemento
                 //Reducción del maximo menos 1
+                //Cambio de bandera para la busqueda exitosa en el vector de Claudia
                 maximo--;
-
-                ///Disminuimos a j para que se quede en el mismo
-                ///lugar (vease que el elemento que estaba en esa
-                ///posicion fue eliminado, si no disminuimos j en 1
-                ///nos saltamos un valor por analizar).
+                //Reducción de j menos uno
                 j--;
             }
       }
-      //maximo = 5;
+      //Retorno del maximo para que sea igual al maximo de los arreglos
+      return maximo;
 }
 
 
