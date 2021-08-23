@@ -5,8 +5,8 @@
 #include <time.h>
 using namespace std;
 //Declaración de varaibles globales 
-int maximo = 5, mitad, maximoClaudia, maximoJuan;
-int sueldoClaudia[5], sueldoJuan[5];
+int maximo = 20, mitad, maximoClaudia, maximoJuan, sumaClaudia=0, sumaJuan=0;
+int sueldoClaudia[20], sueldoJuan[20];
 bool banderaSalario = false, banderaBusquedaClaudia = false, banderaBusquedaJuan = false, banderaOrdenamiento = false;
 string juan = "Juan", claudia = "Claudia";
 int arreglo[] = {1859,8971,1528,2659,2581};
@@ -25,25 +25,29 @@ void ordenamientoSeleccion(int arreglo[], int maximo);
 void menuOrdenamiento();
 void menuPricipal();
 void menuSeleccionPersona();
+void menuSeleccionComplementaria();
 //Declaración las opciones del menu principal
 void opcionUnoPrincipal();
 void opcionDosPrincipal();
 void opcionTresPrincipal();
 void opcioncuatroPrincipal();
 void opcionCincoPrincipal();
+void opcionSeisPrincipal();
 //Declaración de las opciones del menú secundario de ordenamiento
 void opcionUnoOrdenamiento();
 void opcionDosOrdenamiento();
 void opcionTresOrdenamiento();
 void opcionCuatroOrdenamiento();
-
+//Declaracion de las opciones del menú secundario de seleccion de persona
 void opcionUnoPersona();
 void opcionDosPersona();
 
 //Declaración de la función que realiza la busqueda por medio de método de busqueda binaria.
 void busquedaBinaria(int dato, int arreglo[], string nombre, int maximoUso);
-
+//Declaración de la función que elimina los valores duplicados
 int eliminarDuplicado(int arreglo[], int maximo);
+//DEclaración de la función que realizar la suma de los elementos de un arreglo
+int sumaElementos(int arreglo[]);
 //Declaración de la función principal
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
@@ -100,8 +104,8 @@ void menuPricipal(){
 				//Llamado a la función de la quinta posición del menú principal                           
 				opcionCincoPrincipal();                           
                 break;
-			case 6:                            
-                           
+			case 6:      
+				opcionSeisPrincipal();      
                 break;
 			case 7:  //Opción que da por terminado el ciclo y se da por concluido el usu del menú                          
                 cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
@@ -198,6 +202,7 @@ void menuSeleccionPersona(){
         cout <<"Selecciona alguna de las siguientes opciones que se muestra a continuación " <<endl;
         cout << "1. Búsqueda salario Claudia" << endl;
         cout << "2. Busqueda salario Juan" << endl;
+        cout << "3. Salir al menú principal" << endl;
         cout << "\nIngrese una opcion: ";
         //Ingreso de la opcion por medio del teclado que realice el usuario
 		cin >> opcion;
@@ -206,19 +211,17 @@ void menuSeleccionPersona(){
             case 1:
             	//Llamado a la primera opcion del menu de selección de la persona
 				opcionUnoPersona();
-				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-            	cout << "Regresando al menú principal." <<endl;//Mensaje al usuario para regresar al menú principal
-            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-				repetir = false;//variable que permite la salida del ciclo asignandole el valor de false
                 break;                
             case 2:
             	//Llamado a la segunda opcion del menu de selección de la persona
             	opcionDosPersona();
+                break;  
+			case 3:
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
             	cout << "Regresando al menú principal." <<endl;//Mensaje al usuario para regresar al menú principal
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
 				repetir = false;//variable que permite la salida del ciclo asignandole el valor de false
-                break;                                         	
+                break;                                       	
             default:
             	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
             	cout <<"Esta no es una opción del menú" <<endl;//Mensaje al usuario para indicarle que no ha escogido una opción del menú
@@ -229,6 +232,89 @@ void menuSeleccionPersona(){
     } while (repetir);//Lectura de la variable repetir para validar que se continue con el ciclo do/while
 }
 
+//Declaración de la función de menú para operaciones complementarias
+void menuSeleccionComplementaria(){
+	//Declaración de variable opcion que se necesita para poder realizar el ingreseo de una opción
+	int opcion, promedioJuan, promedioClau;
+	//Dclaracion de la variable repetir para dar por terminao la ejecución del ciclo
+    bool repetir = true;
+    
+    //Llamado a la función que realiza la suma de los valores de un arreglos
+    sumaClaudia = sumaElementos(sueldoClaudia);
+	sumaJuan = sumaElementos(sueldoJuan);
+	//Inicio del ciclo do while
+    do {
+    	//Función que limpia la pantalla de todo lo que se ha hecho anteriormente
+    	system("cls");
+    	//Impresión de los diferentes opciones que se tiene en el menú de operaciones complemetarias
+        cout << "\n\n Menú secundario para seleccionar operaciones complementarias del salario de las personas" << endl <<endl;
+        cout <<"Selecciona alguna de las siguientes opciones que se muestra a continuación " <<endl;
+        cout << "1. ¿Quien gana mas?" << endl;
+        cout << "2. Promedio de los salarios" << endl;
+        cout << "3. Comparación de los sueldos en la posicion 5" << endl;
+        cout << "4. Salir al menú principal";
+        
+        cout << "\nIngrese una opcion: ";
+        //Ingreso de la opcion por medio del teclado que realice el usuario
+		cin >> opcion;
+        //Bloque switch para las diferentes opciones que ingrese el usuario        
+        switch (opcion) {
+        	
+            case 1:	
+				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				//Sentencia para compara la suma de los sueldos de Juan y Claudia
+				if(sumaClaudia == sumaJuan){
+					cout<<"Ambos ganan los mismo: " << endl;
+					cout<<"Claudia gana: " << sumaClaudia <<endl;
+					cout<<"Juan gana: " << sumaJuan <<endl;
+				}else if(sumaClaudia > sumaJuan){
+					cout<<"Claudia gana mas que Juan" << endl;
+					cout<<"Claudia gana: " << sumaClaudia <<endl;
+					cout<<"Juan gana: " << sumaJuan <<endl;
+				}else if(sumaClaudia< sumaJuan){
+					cout<<"Juan gana mas que Claudia" <<endl;
+					cout<<"Claudia gana: " << sumaClaudia <<endl;
+					cout<<"Juan gana: " << sumaJuan <<endl;
+				}
+				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
+				break;    
+            case 2:
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	//Asignación del promedio a partir de la suma de los elementos de un vector
+				promedioClau = sumaClaudia / maximo;
+            	promedioJuan = sumaJuan/ maximo;
+            	cout <<"El promedio del salario de Claudia es: " << promedioClau <<endl;
+            	cout <<"El promedio del salario de Juan es: " << promedioJuan <<endl;
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
+                break;  
+			case 3:
+				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	//Sentencia que compara la posición de ambos vectores para determianr si son iguales
+				if(sueldoClaudia[4] == sueldoJuan[4]){
+            		cout<<"Los sueldos son iguales en la posición 5" << endl;
+				}else{
+					cout<<"Los sueldos no son iguales en la posición 5" << endl;
+				}
+				cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
+                break;
+			case 4:
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	cout << "Regresando al menú principal." <<endl;//Mensaje al usuario para regresar al menú principal
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				repetir = false;//variable que permite la salida del ciclo asignandole el valor de false
+                break;                                        	
+            default:
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	cout <<"Esta no es una opción del menú" <<endl;//Mensaje al usuario para indicarle que no ha escogido una opción del menú
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.	
+            	break;       			
+        }        
+    } while (repetir);//Lectura de la variable repetir para validar que se continue con el ciclo do/while
+}
 //Seccion de opciones del menú principal del programa
 //Función para la primera opción del menú principal
 void opcionUnoPrincipal(){
@@ -297,21 +383,15 @@ void opcioncuatroPrincipal(){
 	cout << "Elegiste la opción 4" <<endl;
 	//Validación para determinar si el usuario ya ha ingresado los sueldos de Claudia y Juan
 	if(banderaSalario){
-		//cout<<"Se dirigira a un menú secundario" << endl;
-		//cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
-		//system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
-		//Llamado al menpu secundario, donde se muestran los métodos de ordenamiento
-		//menuOrdenamiento();
-		//Bandera que indica que ya se han ordenado los sueldos de Claudia y juan
-		//banderaOrdenamiento = true;
-		//impresionArreglo(sueldoClaudia, maximoClaudia); 
+		//Asignación del maximo del arreglos con lo que se obtenga de eliminar los elementos repetidos de Claudia
 		maximoClaudia = eliminarDuplicado(sueldoClaudia, maximoClaudia);
-		impresionArreglo(sueldoClaudia, maximoClaudia); 
-		cout << "Se han eliminado los sueldos repetidos de Claudia" <<endl;  
-		//impresionArreglo(sueldoJuan, maximoJuan); 
+		cout << "Se han eliminado los sueldos repetidos de Claudia" <<endl;
+		impresionArreglo(sueldoClaudia, maximoClaudia);   
+ 		//Asignación del maximo del arreglo con lo que se obtenga de eliminar los elementos repetidos de Juan
 		maximoJuan = eliminarDuplicado(sueldoJuan, maximoJuan);
-		impresionArreglo(sueldoJuan, maximoJuan);
 		cout << "Se han eliminado los sueldos repetidos de Juan " << endl;
+		impresionArreglo(sueldoJuan, maximoJuan);
+
 	}else{// En caso de que no hayan ingresado sueldos a los arreglos se le notifica al usuario
 		cout<<"No se han registrado los salarios de Claudia y Juan, selecciona la opción 1" <<endl;
 		cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
@@ -344,6 +424,30 @@ void opcionCincoPrincipal(){
 	system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
 }
 
+//Función para la sexta opción del menú principal
+void opcionSeisPrincipal(){
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	cout << "Elegiste la opción 6" <<endl;
+	//Validación para determinar si el usuario ya ha ingresado los sueldos de Claudia y Juan
+	if(banderaSalario){
+		//Validación para determinar si el usuario ya ha ordenado los sueldos de Claudia y Juan
+		if(banderaOrdenamiento){
+			cout<<"Se dirigira a un menú secundario" << endl;
+			cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+			system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
+			//Llamado al menú secundario para poder realizar la busqueda del sueldo de alguna de las personas
+			menuSeleccionComplementaria();
+		}else{// En caso de que no hayan ordenado a los arreglos se le notifica al usuario
+			cout<<"No se ha generado el ordenamiento de los vectores, selecciona la opción 3" << endl;
+			cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+		}
+		
+	}else{// En caso de que no hayan ingresado sueldos a los arreglos se le notifica al usuario
+		cout<<"No se han registrado los salarios de Claudia y Juan, selecciona la opción 1" <<endl;
+		cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	}
+	system("pause");//Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.
+}
 //Función para la primera opcion del menú de selección de una persona
 void opcionUnoPersona(){
 	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
@@ -355,13 +459,15 @@ void opcionUnoPersona(){
 	//Validación para el caso de que se haya encontrado un sueldo
 	if(banderaBusquedaClaudia){
 		//Mensaje de confirmación para el caso de que se haya encontrado un sueldo
-		cout<< "Se ha encontrado " << sueldoClaudia[mitad] << " en la posicion " << mitad << endl;
+		cout<< "Se ha encontrado el sueldo " << sueldoClaudia[mitad] << " en la posicion " << (mitad+1) << endl;
 		//Cambio de estado de bandera para que se vuelva a realizar la busqueda
 		banderaBusquedaClaudia = false;
 	}else{
 		//Mensaje al usuario en caso de que no se haya encotrado un valor de un sueldo
 		cout<< "No se ha encontrado el salario ingresado" << endl;
-	}       
+	} 
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	system("pause");      
 }
 
 //Función para la segunda opcion del menú de selección de una persona
@@ -375,13 +481,15 @@ void opcionDosPersona(){
 	//Validación para el caso de que se haya encontrado un sueldo
 	if(banderaBusquedaJuan){
 		//Mensaje de confirmación para el caso de que se haya encontrado un sueldo
-		cout<< "Se ha encontrado " << sueldoJuan[mitad] << " en la posicion " << mitad << endl;
+		cout<< "Se ha encontrado el sueldo " << sueldoJuan[mitad] << " en la posicion " << (mitad+1) << endl;
 		//Cambio de estado de bandera para que se vuelva a realizar la busqueda
 		banderaBusquedaJuan = false;
 	}else{
 		//Mensaje al usuario en caso de que no se haya encotrado un valor de un sueldo
 		cout<< "No se ha encontrado el salario ingresado" << endl;
-	}       
+	}
+	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+	system("pause");       
 }
 
 //Función para la primera opcion del menú de ordenamiento
@@ -672,4 +780,16 @@ int eliminarDuplicado(int arreglo[], int maximo){
       return maximo;
 }
 
-
+//Función que realiza la suma se elementos de un arreglo
+int sumaElementos(int arreglo[]){
+	//Declaración de la suma
+	int sumatoria = 0;
+	//REcorrido de los elementos de un arreglo
+    for (int x = 0; x < maximo; x++) {
+    	//Asignación del numero actual el valor del arreglo en la posicion i
+        int numeroActual = arreglo[x];
+        // asignacipn de la sumatoria
+        sumatoria = sumatoria + numeroActual;
+    }
+    return sumatoria; //Retorno de la suma realizada en el arreglo
+}
