@@ -8,14 +8,14 @@ using namespace std;
 
 //Estructura donde se declara un nodo
 struct Nodo{
-	int dato;
+	char dato;
 	Nodo *der;
 	Nodo *izq;
 };
 
 Nodo *arbol = NULL;
-Nodo *crearNodo(int);
-void insertarNodo(Nodo *&, int);
+Nodo *crearNodo(char);
+void insertarNodo(Nodo *&, char);
 void menu();
 void mostrarArbol(Nodo *arbol, int contador);
 bool busqueda(Nodo *arbol, int n);
@@ -25,16 +25,19 @@ void posOrden(Nodo *arbol);
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
 	setlocale(LC_ALL, "");
-	struct Nodo *raiz = crearNodo(28);
-    insertarNodo(raiz, 11);
-    insertarNodo(raiz, 96);
-    insertarNodo(raiz, 21);
-    insertarNodo(raiz, 6);
-    insertarNodo(raiz, 97);
-    insertarNodo(raiz, 1);
-    insertarNodo(raiz, 30);
-    insertarNodo(raiz, 10);
-    insertarNodo(raiz, 2);
+	struct Nodo *raiz = crearNodo('+');
+    insertarNodo(raiz, '1');
+    insertarNodo(raiz, '*');
+    insertarNodo(raiz, '+');
+    insertarNodo(raiz, '0');
+    insertarNodo(raiz, '7');
+    insertarNodo(raiz, '8');
+    //insertarNodo(raiz, 6);
+    //insertarNodo(raiz, 97);
+    //insertarNodo(raiz, 1);
+    //insertarNodo(raiz, 30);
+    //insertarNodo(raiz, 10);
+    //insertarNodo(raiz, 2);
     int contador =1;
     mostrarArbol(raiz,contador);
 	//menu();
@@ -101,7 +104,7 @@ void menu(){
 }
 
 //Funcion para crear un nodo
-Nodo *crearNodo(int n){
+Nodo *crearNodo(char n){
 	//cout<<"Método de crear nodo"<<endl;
 	Nodo *nuevoNodo = new Nodo();
 	nuevoNodo -> dato = n;
@@ -111,7 +114,7 @@ Nodo *crearNodo(int n){
 }
 
 //Funcion para insertar elementos en el arbol.
-void insertarNodo(Nodo *&arbol, int n){
+void insertarNodo(Nodo *&arbol, char n){
 	//cout<<"Método insertar un nodo"<<endl;
 	//Si el arbol esta vacio
 	if(arbol == NULL){
