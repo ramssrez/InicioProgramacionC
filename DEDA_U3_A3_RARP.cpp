@@ -22,6 +22,9 @@ void menu();
 void mostrarArbol(Nodo *arbol, int contador);
 
 int main(){
+	int var = 20;
+	cout<<var<<endl;
+	cout<<&var<<endl;
 	//Función que toma el idioma del sistema para poder imprimir los acentos
 	setlocale(LC_ALL, "");
 	menu();
@@ -30,21 +33,32 @@ int main(){
 
 //Función del menú
 void menu(){
-	int opcion, dato;
+	int opcion, dato, contador = 0;
 	do{
 		cout<<"\t.:MENU: "<<endl;
 		cout << "1. Insertar un nuevo nodo" << endl;
-        cout << "2. Salir" << endl;
+		cout << "2. Mostrar arbolcompleto" << endl;
+        cout << "3. Salir" << endl;
         cout <<"Ingresa una opcion: ";
         cin >> opcion;
         switch(opcion){
-        	case 1: 
-			cout<<"\tDigita un número: ";
-        	cin >> dato;
-        	insertarNodo(arbol, dato);
-        	cout<<"\n";
-        	system("pause");
-        	break;
+        	case 1:
+        		cout<<"\tDigita un número: ";
+        		cin >> dato;
+        		insertarNodo(arbol, dato);
+        		cout<<"\n";
+        		system("pause");
+        		break;
+        	case 2:
+        		cout<<"Mostrando el arbol completo: ";
+        		mostrarArbol(arbol, contador);
+        		cout<<"\n";
+        		system("pause");
+        		break;
+        	//default:
+        	//	cout<<"No es un valor del menú" << endl;
+        		
+        		
 		}
 		system("cls");
 	}while (opcion !=2);
