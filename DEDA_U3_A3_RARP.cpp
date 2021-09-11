@@ -6,6 +6,7 @@
 #include <conio.h>
 using namespace std;
 
+//Estructura donde 
 struct Nodo{
 	//cout<<"Creación de nodo"<<endl;
 	int dato;
@@ -14,9 +15,7 @@ struct Nodo{
 };
 
 Nodo *arbol = NULL;
-
 Nodo *crearNodo(int);
-
 void insertarNodo(Nodo *&, int);
 void menu();
 void mostrarArbol(Nodo *arbol, int contador);
@@ -50,7 +49,7 @@ void menu(){
         		system("pause");
         		break;
         	case 2:
-        		cout<<"Mostrando el arbol completo: ";
+        		cout<<"Mostrando el arbol completo: "<<endl;
         		mostrarArbol(arbol, contador);
         		cout<<"\n";
         		system("pause");
@@ -61,7 +60,7 @@ void menu(){
         		
 		}
 		system("cls");
-	}while (opcion !=2);
+	}while (opcion !=3);
 }
 
 //Funcion para crear un nodo
@@ -76,7 +75,7 @@ Nodo *crearNodo(int n){
 
 //Funcion para insertar elementos en el arbol.
 void insertarNodo(Nodo *&arbol, int n){
-	//Si el arbol esta vacion
+	//Si el arbol esta vacio
 	if(arbol == NULL){
 		//cout<<"El arbol es nulo"<<endl;
 		Nodo *nuevoNodo = crearNodo(n);
@@ -84,6 +83,7 @@ void insertarNodo(Nodo *&arbol, int n){
 	}else{ //Si el arbol tiene un nodo o mas de un nodo
 		//cout<<"El arbol tiene nodo"<<endl;
 		int valorRaiz = arbol->dato; //Obtenemos l valor de la raiz
+		cout<<"valorRaiz "<<valorRaiz<<endl;
 		if(n< valorRaiz){ //Si el elemento es menor a la raiz, insertamos a la izquierda
 			insertarNodo(arbol->izq,n);
 			//cout<<"El valor es menor a la raiz"<<endl;
