@@ -25,19 +25,7 @@ void posOrden(Nodo *arbol);
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
 	setlocale(LC_ALL, "");
-	struct Nodo *raiz = crearNodo(28);
-    insertarNodo(raiz, 11);
-    insertarNodo(raiz, 96);
-    insertarNodo(raiz, 21);
-    insertarNodo(raiz, 6);
-    insertarNodo(raiz, 97);
-    insertarNodo(raiz, 1);
-    insertarNodo(raiz, 30);
-    insertarNodo(raiz, 10);
-    insertarNodo(raiz, 2);
-    int contador =1;
-    mostrarArbol(raiz,contador);
-	//menu();
+	menu();
 	return 0;
 }
 
