@@ -11,17 +11,20 @@ struct Nodo{
 	int dato;
 	Nodo *der;
 	Nodo *izq;
+	Nodo *padre;
 };
 
 Nodo *arbol = NULL;
-Nodo *crearNodo(int);
-void insertarNodo(Nodo *&, int);
+Nodo *crearNodo(int, Nodo *);
+void insertarNodo(Nodo *&, int, Nodo *);
 void menu();
 void mostrarArbol(Nodo *arbol, int contador);
 bool busqueda(Nodo *arbol, int n);
 void preOrden(Nodo *arbol);
 void inOrden(Nodo *arbol);
 void posOrden(Nodo *arbol);
+void eliminar(Nodo *, int);
+void eliminarNodo(Nodo *);
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
 	setlocale(LC_ALL, "");
@@ -47,7 +50,7 @@ void menu(){
         	case 1:
         		cout<<"\tDigita un número: ";
         		cin >> dato;
-        		insertarNodo(arbol, dato);
+        		insertarNodo(arbol, dato,NULL);
         		cout<<"\n";
         		//system("pause");
         		break;
@@ -89,32 +92,33 @@ void menu(){
 }
 
 //Funcion para crear un nodo
-Nodo *crearNodo(int n){
+Nodo *crearNodo(int n, Nodo *padre){
 	//cout<<"Método de crear nodo"<<endl;
 	Nodo *nuevoNodo = new Nodo();
 	nuevoNodo -> dato = n;
 	nuevoNodo -> der = NULL;
 	nuevoNodo -> izq = NULL;
+	nuevoNodo -> padre = padre; 
 	return nuevoNodo;
 }
 
 //Funcion para insertar elementos en el arbol.
-void insertarNodo(Nodo *&arbol, int n){
+void insertarNodo(Nodo *&arbol, int n, Nodo *padre){
 	//cout<<"Método insertar un nodo"<<endl;
 	//Si el arbol esta vacio
 	if(arbol == NULL){
 		//cout<<"El arbol es nulo"<<endl<<endl;
-		Nodo *nuevoNodo = crearNodo(n);
+		Nodo *nuevoNodo = crearNodo(n,padre);
 		arbol = nuevoNodo;
 	}else{ //Si el arbol tiene un nodo o mas de un nodo
 		//cout<<"El arbol tiene nodo"<<endl<<endl;
 		int valorRaiz = arbol->dato; //Obtenemos l valor de la raiz
 		//cout<<"valorRaiz "<<valorRaiz<<endl<<endl;
 		if(n< valorRaiz){ //Si el elemento es menor a la raiz, insertamos a la izquierda
-			insertarNodo(arbol->izq,n);
+			insertarNodo(arbol->izq,n,arbol);
 			//cout<<"El valor es menor a la raiz"<<endl<<endl;
 		}else{//Si el elemento es mayor a la raiz, insertar del lado derecha
-			insertarNodo(arbol->der,n);
+			insertarNodo(arbol->der,n,arbol);
 			//cout<<"El valor es mayor a la raiz"<<endl<<endl;
 		}
 	}	
@@ -186,4 +190,21 @@ void posOrden(Nodo *arbol){
 		cout<<arbol->dato<<" ";	
 	}
 }
+
+//Eliminar un nodo del arbol
+void eliminar(Nodo *arbol, int n){
+	if(arbol == NULL){
+		return; //No hace nada
+	}else if(n < arbol->dato){ //Si el valor es menor busca por la izquierda
+		eliminar(arbol->izq,n);
+	}else if(n > arbol->dato){
+		eliminar(arbol->der,n); //Si el valor es mayor busca por la derecha
+	}else{//Si ya encontraste el valor
+		eliminarNodo(arbol);
+	}	
+}
+
+//Funcion para eliminar el nodo encontrado
+void eliminarNodo(Nodo *arbol){
 	
+}
