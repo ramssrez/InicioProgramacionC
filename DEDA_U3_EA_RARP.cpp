@@ -3,9 +3,8 @@
 #include <locale.h>
 #include<stdlib.h>
 #include <time.h>
-#include <conio.h>
 using namespace std;
-
+//Declaración de varaibles globales 
 //Estructura donde se declara un nodo
 struct Nodo{
 	int dato;
@@ -13,82 +12,104 @@ struct Nodo{
 	Nodo *izq;
 	Nodo *padre;
 };
-
 Nodo *arbol = NULL;
+
+//Declaración de los funciones que se van a utilizar
 Nodo *crearNodo(int, Nodo *);
 void insertarNodo(Nodo *&, int, Nodo *);
-void menu();
-void mostrarArbol(Nodo *arbol, int contador);
-bool busqueda(Nodo *arbol, int n);
+void mostrarArbol(Nodo *, int);
 void preOrden(Nodo *arbol);
 void inOrden(Nodo *arbol);
 void posOrden(Nodo *arbol);
-void eliminar(Nodo *, int);
-void eliminarNodo(Nodo *);
+void eliminar(Nodo*, int);
+void eliminarNodo(Nodo*);
+Nodo* minimo(Nodo*);
+void reemplazar(Nodo*, Nodo*);
+void destruirNodo(Nodo*);
+void menuPricipal();
+
 int main(){
 	//Función que toma el idioma del sistema para poder imprimir los acentos
 	setlocale(LC_ALL, "");
-	menu();
-	return 0;
+	//Llamado al menú principal del programa
+	menuPricipal();
+	//Retorno cero para que se de por terminado el programa
+    return 0;
 }
 
-//Función del menú
-void menu(){
-	int opcion, dato, contador = 1;
-	do{
-		cout<<"\t.:MENU: "<<endl;
-		cout << "1. Insertar un nuevo nodo" << endl;
-		cout << "2. Mostrar arbol completo" << endl;
-		cout << "3. Buscar un elemento del arbol" << endl;
-		cout << "4. Recorrer el arbol en PreOrden" << endl;
-		cout << "5. Recorrer el arbol en InOrden" << endl;
-		cout << "6. Recorrer el arbol en PosOrden" << endl;
-        cout << "7. Salir" << endl;
-        cout <<"Ingresa una opcion: ";
-        cin >> opcion;
-        switch(opcion){
-        	case 1:
-        		cout<<"\tDigita un número: ";
-        		cin >> dato;
-        		insertarNodo(arbol, dato,NULL);
-        		cout<<"\n";
-        		//system("pause");
-        		break;
-        	case 2:
-        		cout<<"Mostrando el arbol completo: "<<endl;
+//Declaración de la función de menú principal con los diferentes opciones
+void menuPricipal(){
+	//Declaración de variable opcion que se necesita para poder realizar el ingreso de una opción
+	int opcion, dato, contador=1;
+	//Dclaracion de la variable repetir para dar por terminao la ejecución del ciclo
+    bool repetir = true;
+    
+    //Inicio del ciclo do while
+    do {	
+    	//Función que limpia la pantalla de todo lo que se ha hecho anteriormente
+    	system("cls");
+    	//Impresión de los diferentes opciones que se tiene en el menú principal
+        cout << "\n\nMenú principal para seleccionar alguna de las siguiente opciones a realizar" << endl <<endl;
+        cout <<"Selecciona alguna de las siguientes opciones que se muestra a continuación " <<endl;
+        cout << "1. Insertar un nuevo nodo" << endl;
+        cout << "2. Eliminar nodo" << endl;
+        cout << "3. Impresión de contenido PreOrden, InOrden, PosOrden" << endl;
+        cout << "4. Salir" << endl;
+		cout << "\nIngrese una opcion: ";
+        //Ingreso de la opcion por medio del teclado que realice el usuario
+		cin >> opcion;
+        //Bloque switch para las diferentes opciones que ingrese el usuaio
+        switch (opcion) {
+            case 1:      
+				//Llamado a la primera opcion del menu principal         
+                //opcionUnoPrincipal();
+                //Break que permite termilar la selección de los casos
+                cout << "Digite un numero: ";
+            	cin >> dato;
+            	insertarNodo(arbol, dato,NULL);
+            	cout << "\n";
+            	system("pause");
+                break;                
+            case 2:
+            	//Llamado a la segunda opción de menú principal
+            	//opcionDosPrincipal();
+            	cout << "\nDigite el numero que desea eliminar:";
+            	cin >> dato;
+            	eliminar(arbol, dato);
+            	cout << "\n";
+            	system("pause");
+                break;                
+            case 3:
+            	//Llamada a la funión de la tercera opción del menú principal
+            	//opcionTresPrincipal();
+            	cout<<"Mostrando el arbol completo: "<<endl;
         		mostrarArbol(arbol, contador);
         		cout<<"\n";
-        		//system("pause");
-        		break;
-        	//default:
-        	//	cout<<"No es un valor del menú" << endl;
-        	case 3:
-				cout<<"Digite el elemento a buscar: ";
-				cin >>dato;
-				if(busqueda(arbol, dato)){
-					cout<<"Elemento "<<dato<< " ha sido encontrado en el arbol"<<endl;
-				}else{
-					cout<<"Elemento no encontrado"<<endl;
-				}	
-        		break;
-        	case 4:
-        		cout<<"Recorrido PreOrden: ";
+            	cout<<"Recorrido PreOrden: ";
 				preOrden(arbol);
 				cout<<endl;
-				break;
-			case 5:
-        		cout<<"Recorrido InOrden: ";
+				cout<<"Recorrido InOrden: ";
 				inOrden(arbol);
 				cout<<endl;
-				break;
-			case 6:
-        		cout<<"Recorrido PosOrden: ";
+				cout<<"Recorrido PosOrden: ";
 				posOrden(arbol);
 				cout<<endl;
-				break;
-		}
-		//system("cls");
-	}while (opcion !=7);
+				system("pause");
+                break;
+			case 4:  //Opción que da por terminado el ciclo y se da por concluido el usu del menú                          
+                cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	cout << "Gracias por usar este programa." <<endl; //Mensaje en pantalla para mencionar al usuario que se ha terminado el programa
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				repetir = false;   //variable que permite la salida del ciclo asignandole el valor de false                        
+                break;                        	
+            default://Opción para el caso en donde no se ha agregado las opciones del menú
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+            	cout <<"Esta no es una opción del menú" <<endl;//Mensaje en pantalla, mencionando al usuairo que no ha agregado una opción del menú
+            	cout<<"--------------------------------------------------------------------------------------------------------------------" <<endl;
+				system("pause"); //Función de C++ que necesita el tecleo de una letra del usuario para poder continuar la ejecucion del programa.	
+            	break;            			
+        }        
+    } while (repetir); //Lectura de la variable repetir para validar que se continue con el ciclo do/while
 }
 
 //Funcion para crear un nodo
@@ -104,55 +125,35 @@ Nodo *crearNodo(int n, Nodo *padre){
 
 //Funcion para insertar elementos en el arbol.
 void insertarNodo(Nodo *&arbol, int n, Nodo *padre){
-	//cout<<"Método insertar un nodo"<<endl;
-	//Si el arbol esta vacio
+	//Verifica si el arbol esta vacio para crear un nuevo nodo
 	if(arbol == NULL){
-		//cout<<"El arbol es nulo"<<endl<<endl;
 		Nodo *nuevoNodo = crearNodo(n,padre);
 		arbol = nuevoNodo;
-	}else{ //Si el arbol tiene un nodo o mas de un nodo
-		//cout<<"El arbol tiene nodo"<<endl<<endl;
-		int valorRaiz = arbol->dato; //Obtenemos l valor de la raiz
-		//cout<<"valorRaiz "<<valorRaiz<<endl<<endl;
-		if(n< valorRaiz){ //Si el elemento es menor a la raiz, insertamos a la izquierda
+	}else{ //Si el arbol tiene un nodo o mas de un nodo realiza lo siguiente
+		int valorRaiz = arbol->dato; //Obtenemos el valor de la raiz
+		if(n< valorRaiz){ //Si el elemento es menor a la raiz, insertamos a la izquierda de la raiz
 			insertarNodo(arbol->izq,n,arbol);
-			//cout<<"El valor es menor a la raiz"<<endl<<endl;
-		}else{//Si el elemento es mayor a la raiz, insertar del lado derecha
+		}else{//Si el elemento es mayor a la raiz, insertar del a la derecha de la raiz
 			insertarNodo(arbol->der,n,arbol);
-			//cout<<"El valor es mayor a la raiz"<<endl<<endl;
 		}
 	}	
 }
 
-//funcion para mostrar el arbol completo.
+//Funcion para mostrar el arbol completo.
 void mostrarArbol(Nodo *arbol, int contador){
-	//cout<<"Método para mostrar un arbol"<<endl;
+	//Verifica si el arbol esta vacio
 	if(arbol == NULL){
-		//cout<<" "<<endl<<endl;
 		return;	
 	}
 	else{
+		//Muestra primero el arbol del lado derecho
 		mostrarArbol(arbol->der,contador+1);
 		for(int i = 0; i<contador; i++){
 			cout<< "   ";
 		}
+		//Muesra el lado izquierdo
 		cout<<arbol->dato<<endl;
 		mostrarArbol(arbol->izq, contador+1);
-	}
-}
-
-//Funición para buscar un elemento en el arbol
-bool busqueda(Nodo *arbol, int n){
-	//cout<<"Método para buscar un nodo"<<endl;
-	//Caso de que el arbol esta vacio
-	if(arbol == NULL){
-		return false;
-	}else if(arbol->dato == n){//Si el nodo es igual al elemento
-		return true;
-	}else if(n < arbol->dato){//En caso de que no sea igual y el menor al valor se busca por la izquierda
-		return busqueda(arbol->izq, n);
-	}else{ // El caso de que no sea igual y mayor al valor del nodo, se busza por la derecha
-		return busqueda(arbol->der, n);
 	}
 }
 
@@ -191,20 +192,84 @@ void posOrden(Nodo *arbol){
 	}
 }
 
-//Eliminar un nodo del arbol
-void eliminar(Nodo *arbol, int n){
-	if(arbol == NULL){
-		return; //No hace nada
-	}else if(n < arbol->dato){ //Si el valor es menor busca por la izquierda
-		eliminar(arbol->izq,n);
-	}else if(n > arbol->dato){
-		eliminar(arbol->der,n); //Si el valor es mayor busca por la derecha
-	}else{//Si ya encontraste el valor
-		eliminarNodo(arbol);
-	}	
+// Funcion para eliminar un nodo del arbol
+void eliminar(Nodo* arbol, int n) {
+    if (arbol == NULL) {
+        return;
+    }
+    else if (n < arbol->dato) { //Si el valor es menor a la raiz
+        eliminar(arbol->izq, n); // Busca por la izquierda
+    }
+    else if (n > arbol->dato) { // Si el valor es mayor a la raiz
+        eliminar(arbol->der, n); //Busca por la derecha
+    }
+    else {
+    	//Llamado a la función de eliminar nodo
+        eliminarNodo(arbol);
+    }
 }
 
-//Funcion para eliminar el nodo encontrado
-void eliminarNodo(Nodo *arbol){
-	
+//Funcion para eliminar el nodo encontrado dentro del arbol
+void eliminarNodo(Nodo* nodoEliminar) {
+	//Verificación para observar si el nodo tiene rama izquierda y derecha
+    if (nodoEliminar->izq && nodoEliminar->der) {
+        Nodo* menor = minimo(nodoEliminar->der); 
+        nodoEliminar->dato = menor->dato;
+        eliminarNodo(menor);
+    }
+    //Si el nodo tiene un hijo izquierdo 
+    else if (nodoEliminar->izq) {
+        reemplazar(nodoEliminar, nodoEliminar->izq);
+        destruirNodo(nodoEliminar);
+    }
+    //Si el nodo tiene un hijo derecho
+    else if (nodoEliminar->der) {
+        reemplazar(nodoEliminar, nodoEliminar->der);
+        destruirNodo(nodoEliminar);
+    }
+    // Si el nodo no tiene hijos y es una hoja
+    else { 
+        reemplazar(nodoEliminar, NULL);
+        destruirNodo(nodoEliminar);
+    }
+}
+
+//Función para determinar el nodo mas izquierdo posible dentro de un arbol
+Nodo* minimo(Nodo* arbol) {
+	//Verificación para el caso de que el arbol este vacío
+    if (arbol == NULL) {
+        return NULL;
+    }
+    if (arbol->izq) { // Si tiene hijo izquierdo
+        return minimo(arbol->izq); // retorna el hijo izquierdo
+    }
+    else { // Si no tiene hijo izquierdo (significa que él es el más izquierdo)
+        return arbol; // Se retorna así mismo
+    }
+}
+
+// Función para reemplazar dos nodos
+void reemplazar(Nodo* arbol, Nodo* nuevoNodo) {
+    if (arbol->padre) {
+        //Nodo padre hay que asignarle un nuevo hijo ya sea por la izquierda o por la derecha
+        if (arbol->dato == arbol->padre->izq->dato) {
+            arbol->padre->izq = nuevoNodo;
+        }
+        else if (arbol->dato == arbol->padre->der->dato) {
+            arbol->padre->der = nuevoNodo;
+        }
+    }
+    if (nuevoNodo) {
+        //Procedemos a asignarle su nuevo padre al nodo
+        nuevoNodo->padre = arbol->padre;
+    }
+}
+
+// Función para destruir un nodo
+void destruirNodo(Nodo* nodo) {
+	//Asignación de nulos del lado de los nodos
+    nodo->izq = NULL;
+    nodo->der = NULL;
+    //Eliminación de los nodos
+    delete nodo;
 }
