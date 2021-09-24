@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cstdlib>
 #include <locale.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include <time.h>
 #include <conio.h>
 using namespace std;
 
 //Estructura donde se declara un nodo
 struct Nodo{
-	char dato;
+	string dato;
 	Nodo *der;
 	Nodo *izq;
 };
@@ -16,9 +16,9 @@ struct Nodo{
 Nodo *arbol = NULL;
 Nodo *crearNodo(char);
 void insertarNodo(Nodo *&, char);
-void menu();
+//void menu();
 void mostrarArbol(Nodo *arbol, int contador);
-bool busqueda(Nodo *arbol, int n);
+//bool busqueda(Nodo *arbol, int n);
 void preOrden(Nodo *arbol);
 void inOrden(Nodo *arbol);
 void posOrden(Nodo *arbol);
@@ -77,10 +77,10 @@ void menu(){
         	case 3:
 				cout<<"Digite el elemento a buscar: ";
 				cin >>dato;
-				if(busqueda(arbol, dato)){
-					cout<<"Elemento "<<dato<< " ha sido encontrado en el arbol"<<endl;
-				}else{
-					cout<<"Elemento no encontrado"<<endl;
+				//if(busqueda(arbol, dato)){
+				//	cout<<"Elemento "<<dato<< " ha sido encontrado en el arbol"<<endl;
+				//}else{
+				//	cout<<"Elemento no encontrado"<<endl;
 				}	
         		break;
         	case 4:
@@ -114,7 +114,7 @@ Nodo *crearNodo(char n){
 }
 
 //Funcion para insertar elementos en el arbol.
-void insertarNodo(Nodo *&arbol, char n){
+void insertarNodo(Nodo *&arbol, char n, string valor){
 	//cout<<"Método insertar un nodo"<<endl;
 	//Si el arbol esta vacio
 	if(arbol == NULL){
@@ -123,9 +123,9 @@ void insertarNodo(Nodo *&arbol, char n){
 		arbol = nuevoNodo;
 	}else{ //Si el arbol tiene un nodo o mas de un nodo
 		//cout<<"El arbol tiene nodo"<<endl<<endl;
-		int valorRaiz = arbol->dato; //Obtenemos l valor de la raiz
+		//int valorRaiz = arbol->dato; //Obtenemos el valor de la raiz
 		//cout<<"valorRaiz "<<valorRaiz<<endl<<endl;
-		if(n< valorRaiz){ //Si el elemento es menor a la raiz, insertamos a la izquierda
+		if(valor == "izquierda"){ //Si el elemento es menor a la raiz, insertamos a la izquierda
 			insertarNodo(arbol->izq,n);
 			//cout<<"El valor es menor a la raiz"<<endl<<endl;
 		}else{//Si el elemento es mayor a la raiz, insertar del lado derecha
@@ -153,19 +153,19 @@ void mostrarArbol(Nodo *arbol, int contador){
 }
 
 //Funición para buscar un elemento en el arbol
-bool busqueda(Nodo *arbol, int n){
+//bool busqueda(Nodo *arbol, int n){
 	//cout<<"Método para buscar un nodo"<<endl;
 	//Caso de que el arbol esta vacio
-	if(arbol == NULL){
-		return false;
-	}else if(arbol->dato == n){//Si el nodo es igual al elemento
-		return true;
-	}else if(n < arbol->dato){//En caso de que no sea igual y el menor al valor se busca por la izquierda
-		return busqueda(arbol->izq, n);
-	}else{ // El caso de que no sea igual y mayor al valor del nodo, se busza por la derecha
-		return busqueda(arbol->der, n);
-	}
-}
+//	if(arbol == NULL){
+//		return false;
+//	}else if(arbol->dato == n){//Si el nodo es igual al elemento
+//		return true;
+//	}else if(n < arbol->dato){//En caso de que no sea igual y el menor al valor se busca por la izquierda
+//		return busqueda(arbol->izq, n);
+//	}else{ // El caso de que no sea igual y mayor al valor del nodo, se busza por la derecha
+//		return busqueda(arbol->der, n);
+//	}
+//}
 
 //Funcion para realizar el recorrido de profundidad preOrden
 void preOrden(Nodo *arbol){
